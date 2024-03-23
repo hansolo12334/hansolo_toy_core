@@ -26,6 +26,7 @@ static const char* Register_method_names[] = {
   "/hansolo.Register/RegistePublisher",
   "/hansolo.Register/RegisteSubscriber",
   "/hansolo.Register/RegistOffline",
+  "/hansolo.Register/GetTopics",
 };
 
 std::unique_ptr< Register::Stub> Register::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -39,6 +40,7 @@ Register::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, 
   , rpcmethod_RegistePublisher_(Register_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_RegisteSubscriber_(Register_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_RegistOffline_(Register_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetTopics_(Register_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status Register::Stub::SayRegist(::grpc::ClientContext* context, const ::hansolo::RegistRequest& request, ::hansolo::RegistReply* response) {
@@ -133,6 +135,29 @@ void Register::Stub::async::RegistOffline(::grpc::ClientContext* context, const 
   return result;
 }
 
+::grpc::Status Register::Stub::GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::hansolo::replyTopics* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::hansolo::requestTopics, ::hansolo::replyTopics, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetTopics_, context, request, response);
+}
+
+void Register::Stub::async::GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::hansolo::requestTopics, ::hansolo::replyTopics, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetTopics_, context, request, response, std::move(f));
+}
+
+void Register::Stub::async::GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetTopics_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>* Register::Stub::PrepareAsyncGetTopicsRaw(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::hansolo::replyTopics, ::hansolo::requestTopics, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetTopics_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>* Register::Stub::AsyncGetTopicsRaw(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncGetTopicsRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 Register::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Register_method_names[0],
@@ -174,6 +199,16 @@ Register::Service::Service() {
              ::hansolo::OfflineReply* resp) {
                return service->RegistOffline(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Register_method_names[4],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Register::Service, ::hansolo::requestTopics, ::hansolo::replyTopics, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Register::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::hansolo::requestTopics* req,
+             ::hansolo::replyTopics* resp) {
+               return service->GetTopics(ctx, req, resp);
+             }, this)));
 }
 
 Register::Service::~Service() {
@@ -201,6 +236,13 @@ Register::Service::~Service() {
 }
 
 ::grpc::Status Register::Service::RegistOffline(::grpc::ServerContext* context, const ::hansolo::OfflineRequest* request, ::hansolo::OfflineReply* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Register::Service::GetTopics(::grpc::ServerContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response) {
   (void) context;
   (void) request;
   (void) response;

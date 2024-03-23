@@ -20,35 +20,8 @@ find_package(gRPC CONFIG REQUIRED)
 message(STATUS "Using gRPC ${gRPC_VERSION}")
 set(_GRPC_GRPCPP gRPC::grpc++)
 set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
-# Proto file
 
 
-# foreach(_proto_file
-#         coreConnection.proto
-#         stdMsg.proto)
-#     get_filename_component(hw_proto "./msg/${_proto_file}"  ABSOLUTE)
-#     get_filename_component(hw_proto_path "${hw_proto}" PATH)
-
-#     set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/${_proto_file}.pb.cc")
-#     set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/${_proto_file}.pb.h")
-#     set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/${_proto_file}.grpc.pb.cc")
-#     set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/${_proto_file}.grpc.pb.h")
-
-#     add_custom_command(
-#       OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
-#       COMMAND ${_PROTOBUF_PROTOC}
-#       ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
-#         --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
-#         -I "${hw_proto_path}"
-#         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-#         "${hw_proto}"
-#       DEPENDS "${hw_proto}")
-
-#     list(APPEND hw_proto_list   ${hw_grpc_srcs}
-#                                 ${hw_grpc_hdrs}
-#                                 ${hw_proto_srcs}
-#                                 ${hw_proto_hdrs})
-# endforeach(_proto_file)
 
 get_filename_component(hw_proto "./msgs/coreConnection.proto" ABSOLUTE)
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
@@ -80,19 +53,6 @@ add_custom_command(
         "${hw_proto}" "${hw_proto1}"
       DEPENDS "${hw_proto}" "${hw_proto1}")
 
-# add_custom_command(
-# OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}" "${hw_proto_srcs1}" "${hw_proto_hdrs1}" "${hw_grpc_srcs1}" "${hw_grpc_hdrs1}"
-# COMMAND ${_PROTOBUF_PROTOC}
-# ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
-#     --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
-#     -I "${hw_proto_path}" "${hw_proto_path1}"
-#     --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-#     "${hw_proto}" "${hw_proto1}"
-# DEPENDS "${hw_proto}" "${hw_proto1}")
-
-
-
-
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
@@ -113,19 +73,21 @@ target_link_libraries(hw_grpc_proto
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
 
-include_directories(./include)
+file(GLOB_RECURSE all_include_dirs RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ./include/*)
+foreach(dir ${all_include_dirs})
+    get_filename_component(dir_path ${dir} PATH)
+    include_directories(${dir_path})
+endforeach()
+
+file(GLOB_RECURSE all_lib RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ./src/*)
 add_library(hansolo_core
-    # ./src/hansolo_publisher.cc
-    ./src/hansolo_node_new.cc
-    ./src/hansolo_master_new.cc
-    ./src/hansolo_tcp.cc
-    ./src/hansolo_tcp_thread.cc
-    ./src/wrap.cc
+    ${all_lib}
     )
 target_link_libraries(hansolo_core hw_grpc_proto)
 
 foreach(_target
-  test_new_core
+  hansolocore
+  hansolotopic
   test_new_node
   test_new_node1
   test_new_node2
@@ -142,24 +104,3 @@ foreach(_target
     pthread)
 endforeach()
 
-
-# add_executable(test_new_core ./test_new_core.cc )
-# target_link_libraries(test_new_core )
-
-# add_executable(test_core ./test_core.cc ${PROTO_SRCS} ${PROTO_HDRS})
-# target_link_libraries(test_core
-#     hansolo_core
-#     ${PROTOBUF_LIBRARY}
-#     pthread)
-
-# add_executable(test_node ./test_node.cc ${PROTO_SRCS} ${PROTO_HDRS})
-# target_link_libraries(test_node
-#     hansolo_core
-#     ${PROTOBUF_LIBRARY}
-#     pthread)
-
-# add_executable(test_node1 ./test_node1.cc ${PROTO_SRCS} ${PROTO_HDRS})
-# target_link_libraries(test_node1
-#     hansolo_core
-#     ${PROTOBUF_LIBRARY}
-#     pthread)

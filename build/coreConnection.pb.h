@@ -81,6 +81,15 @@ extern RegisteSubscriberReplyDefaultTypeInternal _RegisteSubscriberReply_default
 class RegisteSubscriberRequest;
 struct RegisteSubscriberRequestDefaultTypeInternal;
 extern RegisteSubscriberRequestDefaultTypeInternal _RegisteSubscriberRequest_default_instance_;
+class replyTopics;
+struct replyTopicsDefaultTypeInternal;
+extern replyTopicsDefaultTypeInternal _replyTopics_default_instance_;
+class requestTopics;
+struct requestTopicsDefaultTypeInternal;
+extern requestTopicsDefaultTypeInternal _requestTopics_default_instance_;
+class singleTopic;
+struct singleTopicDefaultTypeInternal;
+extern singleTopicDefaultTypeInternal _singleTopic_default_instance_;
 }  // namespace hansolo
 namespace google {
 namespace protobuf {
@@ -128,6 +137,398 @@ inline bool requestStatus_Parse(absl::string_view name, requestStatus* value) {
 
 
 // -------------------------------------------------------------------
+
+class singleTopic final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:hansolo.singleTopic) */ {
+ public:
+  inline singleTopic() : singleTopic(nullptr) {}
+  ~singleTopic() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR singleTopic(::google::protobuf::internal::ConstantInitialized);
+
+  inline singleTopic(const singleTopic& from)
+      : singleTopic(nullptr, from) {}
+  singleTopic(singleTopic&& from) noexcept
+    : singleTopic() {
+    *this = ::std::move(from);
+  }
+
+  inline singleTopic& operator=(const singleTopic& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline singleTopic& operator=(singleTopic&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const singleTopic& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const singleTopic* internal_default_instance() {
+    return reinterpret_cast<const singleTopic*>(
+               &_singleTopic_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(singleTopic& a, singleTopic& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(singleTopic* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr &&
+        GetArena() == other->GetArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(singleTopic* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  singleTopic* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<singleTopic>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const singleTopic& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const singleTopic& from) {
+    singleTopic::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  ::google::protobuf::internal::CachedSize* AccessCachedSize() const final;
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(singleTopic* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "hansolo.singleTopic";
+  }
+  protected:
+  explicit singleTopic(::google::protobuf::Arena* arena);
+  singleTopic(::google::protobuf::Arena* arena, const singleTopic& from);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTopicNameFieldNumber = 1,
+    kTopicClassFieldNumber = 2,
+  };
+  // string topicName = 1;
+  void clear_topicname() ;
+  const std::string& topicname() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_topicname(Arg_&& arg, Args_... args);
+  std::string* mutable_topicname();
+  PROTOBUF_NODISCARD std::string* release_topicname();
+  void set_allocated_topicname(std::string* value);
+
+  private:
+  const std::string& _internal_topicname() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_topicname(
+      const std::string& value);
+  std::string* _internal_mutable_topicname();
+
+  public:
+  // string topicClass = 2;
+  void clear_topicclass() ;
+  const std::string& topicclass() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_topicclass(Arg_&& arg, Args_... args);
+  std::string* mutable_topicclass();
+  PROTOBUF_NODISCARD std::string* release_topicclass();
+  void set_allocated_topicclass(std::string* value);
+
+  private:
+  const std::string& _internal_topicclass() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_topicclass(
+      const std::string& value);
+  std::string* _internal_mutable_topicclass();
+
+  public:
+  // @@protoc_insertion_point(class_scope:hansolo.singleTopic)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      47, 2>
+      _table_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+
+        inline explicit constexpr Impl_(
+            ::google::protobuf::internal::ConstantInitialized) noexcept;
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena);
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena, const Impl_& from);
+    ::google::protobuf::internal::ArenaStringPtr topicname_;
+    ::google::protobuf::internal::ArenaStringPtr topicclass_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_coreConnection_2eproto;
+};// -------------------------------------------------------------------
+
+class requestTopics final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:hansolo.requestTopics) */ {
+ public:
+  inline requestTopics() : requestTopics(nullptr) {}
+  ~requestTopics() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR requestTopics(::google::protobuf::internal::ConstantInitialized);
+
+  inline requestTopics(const requestTopics& from)
+      : requestTopics(nullptr, from) {}
+  requestTopics(requestTopics&& from) noexcept
+    : requestTopics() {
+    *this = ::std::move(from);
+  }
+
+  inline requestTopics& operator=(const requestTopics& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline requestTopics& operator=(requestTopics&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const requestTopics& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const requestTopics* internal_default_instance() {
+    return reinterpret_cast<const requestTopics*>(
+               &_requestTopics_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(requestTopics& a, requestTopics& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(requestTopics* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr &&
+        GetArena() == other->GetArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(requestTopics* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  requestTopics* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<requestTopics>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const requestTopics& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const requestTopics& from) {
+    requestTopics::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  ::google::protobuf::internal::CachedSize* AccessCachedSize() const final;
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(requestTopics* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "hansolo.requestTopics";
+  }
+  protected:
+  explicit requestTopics(::google::protobuf::Arena* arena);
+  requestTopics(::google::protobuf::Arena* arena, const requestTopics& from);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTopicNameFieldNumber = 2,
+    kStatusFieldNumber = 1,
+  };
+  // string topicName = 2;
+  void clear_topicname() ;
+  const std::string& topicname() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_topicname(Arg_&& arg, Args_... args);
+  std::string* mutable_topicname();
+  PROTOBUF_NODISCARD std::string* release_topicname();
+  void set_allocated_topicname(std::string* value);
+
+  private:
+  const std::string& _internal_topicname() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_topicname(
+      const std::string& value);
+  std::string* _internal_mutable_topicname();
+
+  public:
+  // bool status = 1;
+  void clear_status() ;
+  bool status() const;
+  void set_status(bool value);
+
+  private:
+  bool _internal_status() const;
+  void _internal_set_status(bool value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:hansolo.requestTopics)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      39, 2>
+      _table_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+
+        inline explicit constexpr Impl_(
+            ::google::protobuf::internal::ConstantInitialized) noexcept;
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena);
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena, const Impl_& from);
+    ::google::protobuf::internal::ArenaStringPtr topicname_;
+    bool status_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_coreConnection_2eproto;
+};// -------------------------------------------------------------------
 
 class RegisteSubscriberRequest final :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:hansolo.RegisteSubscriberRequest) */ {
@@ -1767,6 +2168,189 @@ class OfflineReply final :
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_coreConnection_2eproto;
+};// -------------------------------------------------------------------
+
+class replyTopics final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:hansolo.replyTopics) */ {
+ public:
+  inline replyTopics() : replyTopics(nullptr) {}
+  ~replyTopics() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR replyTopics(::google::protobuf::internal::ConstantInitialized);
+
+  inline replyTopics(const replyTopics& from)
+      : replyTopics(nullptr, from) {}
+  replyTopics(replyTopics&& from) noexcept
+    : replyTopics() {
+    *this = ::std::move(from);
+  }
+
+  inline replyTopics& operator=(const replyTopics& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline replyTopics& operator=(replyTopics&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const replyTopics& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const replyTopics* internal_default_instance() {
+    return reinterpret_cast<const replyTopics*>(
+               &_replyTopics_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(replyTopics& a, replyTopics& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(replyTopics* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr &&
+        GetArena() == other->GetArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(replyTopics* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  replyTopics* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<replyTopics>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const replyTopics& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const replyTopics& from) {
+    replyTopics::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  ::google::protobuf::internal::CachedSize* AccessCachedSize() const final;
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(replyTopics* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "hansolo.replyTopics";
+  }
+  protected:
+  explicit replyTopics(::google::protobuf::Arena* arena);
+  replyTopics(::google::protobuf::Arena* arena, const replyTopics& from);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAlltopicsFieldNumber = 1,
+  };
+  // repeated .hansolo.singleTopic alltopics = 1;
+  int alltopics_size() const;
+  private:
+  int _internal_alltopics_size() const;
+
+  public:
+  void clear_alltopics() ;
+  ::hansolo::singleTopic* mutable_alltopics(int index);
+  ::google::protobuf::RepeatedPtrField< ::hansolo::singleTopic >*
+      mutable_alltopics();
+  private:
+  const ::google::protobuf::RepeatedPtrField<::hansolo::singleTopic>& _internal_alltopics() const;
+  ::google::protobuf::RepeatedPtrField<::hansolo::singleTopic>* _internal_mutable_alltopics();
+  public:
+  const ::hansolo::singleTopic& alltopics(int index) const;
+  ::hansolo::singleTopic* add_alltopics();
+  const ::google::protobuf::RepeatedPtrField< ::hansolo::singleTopic >&
+      alltopics() const;
+  // @@protoc_insertion_point(class_scope:hansolo.replyTopics)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 1,
+      0, 2>
+      _table_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+
+        inline explicit constexpr Impl_(
+            ::google::protobuf::internal::ConstantInitialized) noexcept;
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena);
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena, const Impl_& from);
+    ::google::protobuf::RepeatedPtrField< ::hansolo::singleTopic > alltopics_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_coreConnection_2eproto;
 };
 
 // ===================================================================
@@ -2714,6 +3298,249 @@ inline void OfflineReply::set_allocated_nodename(std::string* value) {
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:hansolo.OfflineReply.nodeName)
+}
+
+// -------------------------------------------------------------------
+
+// singleTopic
+
+// string topicName = 1;
+inline void singleTopic::clear_topicname() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.topicname_.ClearToEmpty();
+}
+inline const std::string& singleTopic::topicname() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:hansolo.singleTopic.topicName)
+  return _internal_topicname();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void singleTopic::set_topicname(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.topicname_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:hansolo.singleTopic.topicName)
+}
+inline std::string* singleTopic::mutable_topicname() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_topicname();
+  // @@protoc_insertion_point(field_mutable:hansolo.singleTopic.topicName)
+  return _s;
+}
+inline const std::string& singleTopic::_internal_topicname() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.topicname_.Get();
+}
+inline void singleTopic::_internal_set_topicname(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.topicname_.Set(value, GetArena());
+}
+inline std::string* singleTopic::_internal_mutable_topicname() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.topicname_.Mutable( GetArena());
+}
+inline std::string* singleTopic::release_topicname() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:hansolo.singleTopic.topicName)
+  return _impl_.topicname_.Release();
+}
+inline void singleTopic::set_allocated_topicname(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.topicname_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.topicname_.IsDefault()) {
+          _impl_.topicname_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:hansolo.singleTopic.topicName)
+}
+
+// string topicClass = 2;
+inline void singleTopic::clear_topicclass() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.topicclass_.ClearToEmpty();
+}
+inline const std::string& singleTopic::topicclass() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:hansolo.singleTopic.topicClass)
+  return _internal_topicclass();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void singleTopic::set_topicclass(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.topicclass_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:hansolo.singleTopic.topicClass)
+}
+inline std::string* singleTopic::mutable_topicclass() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_topicclass();
+  // @@protoc_insertion_point(field_mutable:hansolo.singleTopic.topicClass)
+  return _s;
+}
+inline const std::string& singleTopic::_internal_topicclass() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.topicclass_.Get();
+}
+inline void singleTopic::_internal_set_topicclass(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.topicclass_.Set(value, GetArena());
+}
+inline std::string* singleTopic::_internal_mutable_topicclass() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.topicclass_.Mutable( GetArena());
+}
+inline std::string* singleTopic::release_topicclass() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:hansolo.singleTopic.topicClass)
+  return _impl_.topicclass_.Release();
+}
+inline void singleTopic::set_allocated_topicclass(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.topicclass_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.topicclass_.IsDefault()) {
+          _impl_.topicclass_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:hansolo.singleTopic.topicClass)
+}
+
+// -------------------------------------------------------------------
+
+// replyTopics
+
+// repeated .hansolo.singleTopic alltopics = 1;
+inline int replyTopics::_internal_alltopics_size() const {
+  return _internal_alltopics().size();
+}
+inline int replyTopics::alltopics_size() const {
+  return _internal_alltopics_size();
+}
+inline void replyTopics::clear_alltopics() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.alltopics_.Clear();
+}
+inline ::hansolo::singleTopic* replyTopics::mutable_alltopics(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:hansolo.replyTopics.alltopics)
+  return _internal_mutable_alltopics()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::hansolo::singleTopic>* replyTopics::mutable_alltopics()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:hansolo.replyTopics.alltopics)
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  return _internal_mutable_alltopics();
+}
+inline const ::hansolo::singleTopic& replyTopics::alltopics(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:hansolo.replyTopics.alltopics)
+  return _internal_alltopics().Get(index);
+}
+inline ::hansolo::singleTopic* replyTopics::add_alltopics() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::hansolo::singleTopic* _add = _internal_mutable_alltopics()->Add();
+  // @@protoc_insertion_point(field_add:hansolo.replyTopics.alltopics)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::hansolo::singleTopic>& replyTopics::alltopics() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:hansolo.replyTopics.alltopics)
+  return _internal_alltopics();
+}
+inline const ::google::protobuf::RepeatedPtrField<::hansolo::singleTopic>&
+replyTopics::_internal_alltopics() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.alltopics_;
+}
+inline ::google::protobuf::RepeatedPtrField<::hansolo::singleTopic>*
+replyTopics::_internal_mutable_alltopics() {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return &_impl_.alltopics_;
+}
+
+// -------------------------------------------------------------------
+
+// requestTopics
+
+// bool status = 1;
+inline void requestTopics::clear_status() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.status_ = false;
+}
+inline bool requestTopics::status() const {
+  // @@protoc_insertion_point(field_get:hansolo.requestTopics.status)
+  return _internal_status();
+}
+inline void requestTopics::set_status(bool value) {
+  _internal_set_status(value);
+  // @@protoc_insertion_point(field_set:hansolo.requestTopics.status)
+}
+inline bool requestTopics::_internal_status() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.status_;
+}
+inline void requestTopics::_internal_set_status(bool value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.status_ = value;
+}
+
+// string topicName = 2;
+inline void requestTopics::clear_topicname() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.topicname_.ClearToEmpty();
+}
+inline const std::string& requestTopics::topicname() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:hansolo.requestTopics.topicName)
+  return _internal_topicname();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void requestTopics::set_topicname(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.topicname_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:hansolo.requestTopics.topicName)
+}
+inline std::string* requestTopics::mutable_topicname() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_topicname();
+  // @@protoc_insertion_point(field_mutable:hansolo.requestTopics.topicName)
+  return _s;
+}
+inline const std::string& requestTopics::_internal_topicname() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.topicname_.Get();
+}
+inline void requestTopics::_internal_set_topicname(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.topicname_.Set(value, GetArena());
+}
+inline std::string* requestTopics::_internal_mutable_topicname() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.topicname_.Mutable( GetArena());
+}
+inline std::string* requestTopics::release_topicname() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:hansolo.requestTopics.topicName)
+  return _impl_.topicname_.Release();
+}
+inline void requestTopics::set_allocated_topicname(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.topicname_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.topicname_.IsDefault()) {
+          _impl_.topicname_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:hansolo.requestTopics.topicName)
 }
 
 #ifdef __GNUC__

@@ -1,33 +1,6 @@
 syntax="proto3";
 package hansolo;
 
-// message hansoloClient{
-//    string clientName=1;
-//    int32 port=2;
-//    string ip_address=3;
-
-// }
-
-// message hansoloClients{
-//   repeated hansoloClient clit = 1;
-//   }
-
-// message firstTouchResultToClient{
-//      string clientName=1;
-//      int32 success=2;
-// }
-
-// message publisherCreateReqFromClient{
-//      string publish_name=1;
-//      string  clientName=2;
-// }
-
-// message publisherCreateAnsToClient{
-//      string clientName=1;
-//      int32 port=2;
-// }
-
-
 
 service Register{
     rpc SayRegist (RegistRequest) returns (RegistReply){}
@@ -37,6 +10,10 @@ service Register{
     rpc RegisteSubscriber (RegisteSubscriberRequest) returns(RegisteSubscriberReply){}
 
     rpc RegistOffline  (OfflineRequest) returns (OfflineReply) {}
+
+    //实现topic 查询功能
+    rpc GetTopics (requestTopics) returns(replyTopics){}
+    
 
 }
 
@@ -94,3 +71,16 @@ message OfflineReply{
     string nodeName=2;
 }
 
+message singleTopic{
+    string topicName=1;
+    string topicClass=2;
+}
+
+message replyTopics{
+    repeated singleTopic alltopics=1;
+}
+
+message requestTopics{
+    bool status=1;
+    string topicName=2;
+}

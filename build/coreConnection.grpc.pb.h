@@ -27,32 +27,6 @@
 
 namespace hansolo {
 
-// message hansoloClient{
-//    string clientName=1;
-//    int32 port=2;
-//    string ip_address=3;
-//
-// }
-//
-// message hansoloClients{
-//   repeated hansoloClient clit = 1;
-//   }
-//
-// message firstTouchResultToClient{
-//      string clientName=1;
-//      int32 success=2;
-// }
-//
-// message publisherCreateReqFromClient{
-//      string publish_name=1;
-//      string  clientName=2;
-// }
-//
-// message publisherCreateAnsToClient{
-//      string clientName=1;
-//      int32 port=2;
-// }
-//
 class Register final {
  public:
   static constexpr char const* service_full_name() {
@@ -89,6 +63,14 @@ class Register final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::OfflineReply>> PrepareAsyncRegistOffline(::grpc::ClientContext* context, const ::hansolo::OfflineRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::OfflineReply>>(PrepareAsyncRegistOfflineRaw(context, request, cq));
     }
+    // 实现topic 查询功能
+    virtual ::grpc::Status GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::hansolo::replyTopics* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::replyTopics>> AsyncGetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::replyTopics>>(AsyncGetTopicsRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::replyTopics>> PrepareAsyncGetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::replyTopics>>(PrepareAsyncGetTopicsRaw(context, request, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
@@ -100,6 +82,9 @@ class Register final {
       virtual void RegisteSubscriber(::grpc::ClientContext* context, const ::hansolo::RegisteSubscriberRequest* request, ::hansolo::RegisteSubscriberReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void RegistOffline(::grpc::ClientContext* context, const ::hansolo::OfflineRequest* request, ::hansolo::OfflineReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void RegistOffline(::grpc::ClientContext* context, const ::hansolo::OfflineRequest* request, ::hansolo::OfflineReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 实现topic 查询功能
+      virtual void GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -113,6 +98,8 @@ class Register final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::RegisteSubscriberReply>* PrepareAsyncRegisteSubscriberRaw(::grpc::ClientContext* context, const ::hansolo::RegisteSubscriberRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::OfflineReply>* AsyncRegistOfflineRaw(::grpc::ClientContext* context, const ::hansolo::OfflineRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::OfflineReply>* PrepareAsyncRegistOfflineRaw(::grpc::ClientContext* context, const ::hansolo::OfflineRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::replyTopics>* AsyncGetTopicsRaw(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::hansolo::replyTopics>* PrepareAsyncGetTopicsRaw(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -145,6 +132,13 @@ class Register final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::hansolo::OfflineReply>> PrepareAsyncRegistOffline(::grpc::ClientContext* context, const ::hansolo::OfflineRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::hansolo::OfflineReply>>(PrepareAsyncRegistOfflineRaw(context, request, cq));
     }
+    ::grpc::Status GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::hansolo::replyTopics* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>> AsyncGetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>>(AsyncGetTopicsRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>> PrepareAsyncGetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>>(PrepareAsyncGetTopicsRaw(context, request, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
@@ -156,6 +150,8 @@ class Register final {
       void RegisteSubscriber(::grpc::ClientContext* context, const ::hansolo::RegisteSubscriberRequest* request, ::hansolo::RegisteSubscriberReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void RegistOffline(::grpc::ClientContext* context, const ::hansolo::OfflineRequest* request, ::hansolo::OfflineReply* response, std::function<void(::grpc::Status)>) override;
       void RegistOffline(::grpc::ClientContext* context, const ::hansolo::OfflineRequest* request, ::hansolo::OfflineReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response, std::function<void(::grpc::Status)>) override;
+      void GetTopics(::grpc::ClientContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -175,10 +171,13 @@ class Register final {
     ::grpc::ClientAsyncResponseReader< ::hansolo::RegisteSubscriberReply>* PrepareAsyncRegisteSubscriberRaw(::grpc::ClientContext* context, const ::hansolo::RegisteSubscriberRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::hansolo::OfflineReply>* AsyncRegistOfflineRaw(::grpc::ClientContext* context, const ::hansolo::OfflineRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::hansolo::OfflineReply>* PrepareAsyncRegistOfflineRaw(::grpc::ClientContext* context, const ::hansolo::OfflineRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>* AsyncGetTopicsRaw(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::hansolo::replyTopics>* PrepareAsyncGetTopicsRaw(::grpc::ClientContext* context, const ::hansolo::requestTopics& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_SayRegist_;
     const ::grpc::internal::RpcMethod rpcmethod_RegistePublisher_;
     const ::grpc::internal::RpcMethod rpcmethod_RegisteSubscriber_;
     const ::grpc::internal::RpcMethod rpcmethod_RegistOffline_;
+    const ::grpc::internal::RpcMethod rpcmethod_GetTopics_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -190,6 +189,8 @@ class Register final {
     virtual ::grpc::Status RegistePublisher(::grpc::ServerContext* context, const ::hansolo::RegistePublisherRequest* request, ::hansolo::RegistePublisherReply* response);
     virtual ::grpc::Status RegisteSubscriber(::grpc::ServerContext* context, const ::hansolo::RegisteSubscriberRequest* request, ::hansolo::RegisteSubscriberReply* response);
     virtual ::grpc::Status RegistOffline(::grpc::ServerContext* context, const ::hansolo::OfflineRequest* request, ::hansolo::OfflineReply* response);
+    // 实现topic 查询功能
+    virtual ::grpc::Status GetTopics(::grpc::ServerContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_SayRegist : public BaseClass {
@@ -271,7 +272,27 @@ class Register final {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_SayRegist<WithAsyncMethod_RegistePublisher<WithAsyncMethod_RegisteSubscriber<WithAsyncMethod_RegistOffline<Service > > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_GetTopics : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_GetTopics() {
+      ::grpc::Service::MarkMethodAsync(4);
+    }
+    ~WithAsyncMethod_GetTopics() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetTopics(::grpc::ServerContext* /*context*/, const ::hansolo::requestTopics* /*request*/, ::hansolo::replyTopics* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetTopics(::grpc::ServerContext* context, ::hansolo::requestTopics* request, ::grpc::ServerAsyncResponseWriter< ::hansolo::replyTopics>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_SayRegist<WithAsyncMethod_RegistePublisher<WithAsyncMethod_RegisteSubscriber<WithAsyncMethod_RegistOffline<WithAsyncMethod_GetTopics<Service > > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_SayRegist : public BaseClass {
    private:
@@ -380,7 +401,34 @@ class Register final {
     virtual ::grpc::ServerUnaryReactor* RegistOffline(
       ::grpc::CallbackServerContext* /*context*/, const ::hansolo::OfflineRequest* /*request*/, ::hansolo::OfflineReply* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_SayRegist<WithCallbackMethod_RegistePublisher<WithCallbackMethod_RegisteSubscriber<WithCallbackMethod_RegistOffline<Service > > > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_GetTopics : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_GetTopics() {
+      ::grpc::Service::MarkMethodCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::hansolo::requestTopics, ::hansolo::replyTopics>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::hansolo::requestTopics* request, ::hansolo::replyTopics* response) { return this->GetTopics(context, request, response); }));}
+    void SetMessageAllocatorFor_GetTopics(
+        ::grpc::MessageAllocator< ::hansolo::requestTopics, ::hansolo::replyTopics>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::hansolo::requestTopics, ::hansolo::replyTopics>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_GetTopics() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetTopics(::grpc::ServerContext* /*context*/, const ::hansolo::requestTopics* /*request*/, ::hansolo::replyTopics* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* GetTopics(
+      ::grpc::CallbackServerContext* /*context*/, const ::hansolo::requestTopics* /*request*/, ::hansolo::replyTopics* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_SayRegist<WithCallbackMethod_RegistePublisher<WithCallbackMethod_RegisteSubscriber<WithCallbackMethod_RegistOffline<WithCallbackMethod_GetTopics<Service > > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_SayRegist : public BaseClass {
@@ -446,6 +494,23 @@ class Register final {
     }
     // disable synchronous version of this method
     ::grpc::Status RegistOffline(::grpc::ServerContext* /*context*/, const ::hansolo::OfflineRequest* /*request*/, ::hansolo::OfflineReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_GetTopics : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_GetTopics() {
+      ::grpc::Service::MarkMethodGeneric(4);
+    }
+    ~WithGenericMethod_GetTopics() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetTopics(::grpc::ServerContext* /*context*/, const ::hansolo::requestTopics* /*request*/, ::hansolo::replyTopics* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -528,6 +593,26 @@ class Register final {
     }
     void RequestRegistOffline(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_GetTopics : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_GetTopics() {
+      ::grpc::Service::MarkMethodRaw(4);
+    }
+    ~WithRawMethod_GetTopics() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetTopics(::grpc::ServerContext* /*context*/, const ::hansolo::requestTopics* /*request*/, ::hansolo::replyTopics* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetTopics(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -616,6 +701,28 @@ class Register final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* RegistOffline(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_GetTopics : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_GetTopics() {
+      ::grpc::Service::MarkMethodRawCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetTopics(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_GetTopics() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetTopics(::grpc::ServerContext* /*context*/, const ::hansolo::requestTopics* /*request*/, ::hansolo::replyTopics* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* GetTopics(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
@@ -726,9 +833,36 @@ class Register final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedRegistOffline(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::hansolo::OfflineRequest,::hansolo::OfflineReply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_SayRegist<WithStreamedUnaryMethod_RegistePublisher<WithStreamedUnaryMethod_RegisteSubscriber<WithStreamedUnaryMethod_RegistOffline<Service > > > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_GetTopics : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_GetTopics() {
+      ::grpc::Service::MarkMethodStreamed(4,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::hansolo::requestTopics, ::hansolo::replyTopics>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::hansolo::requestTopics, ::hansolo::replyTopics>* streamer) {
+                       return this->StreamedGetTopics(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_GetTopics() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetTopics(::grpc::ServerContext* /*context*/, const ::hansolo::requestTopics* /*request*/, ::hansolo::replyTopics* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetTopics(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::hansolo::requestTopics,::hansolo::replyTopics>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_SayRegist<WithStreamedUnaryMethod_RegistePublisher<WithStreamedUnaryMethod_RegisteSubscriber<WithStreamedUnaryMethod_RegistOffline<WithStreamedUnaryMethod_GetTopics<Service > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_SayRegist<WithStreamedUnaryMethod_RegistePublisher<WithStreamedUnaryMethod_RegisteSubscriber<WithStreamedUnaryMethod_RegistOffline<Service > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_SayRegist<WithStreamedUnaryMethod_RegistePublisher<WithStreamedUnaryMethod_RegisteSubscriber<WithStreamedUnaryMethod_RegistOffline<WithStreamedUnaryMethod_GetTopics<Service > > > > > StreamedService;
 };
 
 }  // namespace hansolo

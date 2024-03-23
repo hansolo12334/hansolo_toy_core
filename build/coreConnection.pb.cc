@@ -22,6 +22,52 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace hansolo {
 
+inline constexpr singleTopic::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : topicname_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        topicclass_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR singleTopic::singleTopic(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct singleTopicDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR singleTopicDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~singleTopicDefaultTypeInternal() {}
+  union {
+    singleTopic _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 singleTopicDefaultTypeInternal _singleTopic_default_instance_;
+
+inline constexpr requestTopics::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : topicname_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        status_{false},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR requestTopics::requestTopics(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct requestTopicsDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR requestTopicsDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~requestTopicsDefaultTypeInternal() {}
+  union {
+    requestTopics _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 requestTopicsDefaultTypeInternal _requestTopics_default_instance_;
+
 inline constexpr RegisteSubscriberRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : nodename_(
@@ -214,8 +260,27 @@ struct OfflineReplyDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 OfflineReplyDefaultTypeInternal _OfflineReply_default_instance_;
+
+inline constexpr replyTopics::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : alltopics_{},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR replyTopics::replyTopics(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct replyTopicsDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR replyTopicsDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~replyTopicsDefaultTypeInternal() {}
+  union {
+    replyTopics _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 replyTopicsDefaultTypeInternal _replyTopics_default_instance_;
 }  // namespace hansolo
-static ::_pb::Metadata file_level_metadata_coreConnection_2eproto[8];
+static ::_pb::Metadata file_level_metadata_coreConnection_2eproto[11];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_coreConnection_2eproto[1];
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_coreConnection_2eproto = nullptr;
@@ -306,6 +371,35 @@ const ::uint32_t TableStruct_coreConnection_2eproto::offsets[] PROTOBUF_SECTION_
     ~0u,  // no sizeof(Split)
     PROTOBUF_FIELD_OFFSET(::hansolo::OfflineReply, _impl_.status_),
     PROTOBUF_FIELD_OFFSET(::hansolo::OfflineReply, _impl_.nodename_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::hansolo::singleTopic, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::hansolo::singleTopic, _impl_.topicname_),
+    PROTOBUF_FIELD_OFFSET(::hansolo::singleTopic, _impl_.topicclass_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::hansolo::replyTopics, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::hansolo::replyTopics, _impl_.alltopics_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::hansolo::requestTopics, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::hansolo::requestTopics, _impl_.status_),
+    PROTOBUF_FIELD_OFFSET(::hansolo::requestTopics, _impl_.topicname_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -318,6 +412,9 @@ static const ::_pbi::MigrationSchema
         {52, -1, -1, sizeof(::hansolo::RegisteSubscriberReply)},
         {65, -1, -1, sizeof(::hansolo::OfflineRequest)},
         {75, -1, -1, sizeof(::hansolo::OfflineReply)},
+        {85, -1, -1, sizeof(::hansolo::singleTopic)},
+        {95, -1, -1, sizeof(::hansolo::replyTopics)},
+        {104, -1, -1, sizeof(::hansolo::requestTopics)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -329,6 +426,9 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::hansolo::_RegisteSubscriberReply_default_instance_._instance,
     &::hansolo::_OfflineRequest_default_instance_._instance,
     &::hansolo::_OfflineReply_default_instance_._instance,
+    &::hansolo::_singleTopic_default_instance_._instance,
+    &::hansolo::_replyTopics_default_instance_._instance,
+    &::hansolo::_requestTopics_default_instance_._instance,
 };
 const char descriptor_table_protodef_coreConnection_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
     "\n\024coreConnection.proto\022\007hansolo\"!\n\rRegis"
@@ -347,30 +447,36 @@ const char descriptor_table_protodef_coreConnection_2eproto[] PROTOBUF_SECTION_V
     "ansolo.requestStatus\"0\n\016OfflineRequest\022\020"
     "\n\010nodeName\030\001 \001(\t\022\014\n\004port\030\002 \001(\005\"0\n\014Offlin"
     "eReply\022\016\n\006status\030\001 \001(\010\022\020\n\010nodeName\030\002 \001(\t"
-    "*\215\001\n\rrequestStatus\022!\n\035RegisteSubscribeTa"
-    "rgetOffline\020\000\022\033\n\027RegisteSubscribeSuccess"
-    "\020\001\022%\n!RegistNodeAlreadyHaveSameNodeName\020"
-    "\003\022\025\n\021RegistNodeSuccess\020\0042\275\002\n\010Register\022;\n"
-    "\tSayRegist\022\026.hansolo.RegistRequest\032\024.han"
-    "solo.RegistReply\"\000\022V\n\020RegistePublisher\022 "
-    ".hansolo.RegistePublisherRequest\032\036.hanso"
-    "lo.RegistePublisherReply\"\000\022Y\n\021RegisteSub"
-    "scriber\022!.hansolo.RegisteSubscriberReque"
-    "st\032\037.hansolo.RegisteSubscriberReply\"\000\022A\n"
-    "\rRegistOffline\022\027.hansolo.OfflineRequest\032"
-    "\025.hansolo.OfflineReply\"\000b\006proto3"
+    "\"4\n\013singleTopic\022\021\n\ttopicName\030\001 \001(\t\022\022\n\nto"
+    "picClass\030\002 \001(\t\"6\n\013replyTopics\022\'\n\talltopi"
+    "cs\030\001 \003(\0132\024.hansolo.singleTopic\"2\n\rreques"
+    "tTopics\022\016\n\006status\030\001 \001(\010\022\021\n\ttopicName\030\002 \001"
+    "(\t*\215\001\n\rrequestStatus\022!\n\035RegisteSubscribe"
+    "TargetOffline\020\000\022\033\n\027RegisteSubscribeSucce"
+    "ss\020\001\022%\n!RegistNodeAlreadyHaveSameNodeNam"
+    "e\020\003\022\025\n\021RegistNodeSuccess\020\0042\372\002\n\010Register\022"
+    ";\n\tSayRegist\022\026.hansolo.RegistRequest\032\024.h"
+    "ansolo.RegistReply\"\000\022V\n\020RegistePublisher"
+    "\022 .hansolo.RegistePublisherRequest\032\036.han"
+    "solo.RegistePublisherReply\"\000\022Y\n\021RegisteS"
+    "ubscriber\022!.hansolo.RegisteSubscriberReq"
+    "uest\032\037.hansolo.RegisteSubscriberReply\"\000\022"
+    "A\n\rRegistOffline\022\027.hansolo.OfflineReques"
+    "t\032\025.hansolo.OfflineReply\"\000\022;\n\tGetTopics\022"
+    "\026.hansolo.requestTopics\032\024.hansolo.replyT"
+    "opics\"\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_coreConnection_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_coreConnection_2eproto = {
     false,
     false,
-    1112,
+    1335,
     descriptor_table_protodef_coreConnection_2eproto,
     "coreConnection.proto",
     &descriptor_table_coreConnection_2eproto_once,
     nullptr,
     0,
-    8,
+    11,
     schemas,
     file_default_instances,
     TableStruct_coreConnection_2eproto::offsets,
@@ -2311,6 +2417,623 @@ void OfflineReply::InternalSwap(OfflineReply* PROTOBUF_RESTRICT other) {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_coreConnection_2eproto_getter, &descriptor_table_coreConnection_2eproto_once,
       file_level_metadata_coreConnection_2eproto[7]);
+}
+// ===================================================================
+
+class singleTopic::_Internal {
+ public:
+};
+
+singleTopic::singleTopic(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:hansolo.singleTopic)
+}
+inline PROTOBUF_NDEBUG_INLINE singleTopic::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : topicname_(arena, from.topicname_),
+        topicclass_(arena, from.topicclass_),
+        _cached_size_{0} {}
+
+singleTopic::singleTopic(
+    ::google::protobuf::Arena* arena,
+    const singleTopic& from)
+    : ::google::protobuf::Message(arena) {
+  singleTopic* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+
+  // @@protoc_insertion_point(copy_constructor:hansolo.singleTopic)
+}
+inline PROTOBUF_NDEBUG_INLINE singleTopic::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : topicname_(arena),
+        topicclass_(arena),
+        _cached_size_{0} {}
+
+inline void singleTopic::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+singleTopic::~singleTopic() {
+  // @@protoc_insertion_point(destructor:hansolo.singleTopic)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void singleTopic::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.topicname_.Destroy();
+  _impl_.topicclass_.Destroy();
+  _impl_.~Impl_();
+}
+
+PROTOBUF_NOINLINE void singleTopic::Clear() {
+// @@protoc_insertion_point(message_clear_start:hansolo.singleTopic)
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.topicname_.ClearToEmpty();
+  _impl_.topicclass_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* singleTopic::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 47, 2> singleTopic::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_singleTopic_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string topicClass = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(singleTopic, _impl_.topicclass_)}},
+    // string topicName = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(singleTopic, _impl_.topicname_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string topicName = 1;
+    {PROTOBUF_FIELD_OFFSET(singleTopic, _impl_.topicname_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string topicClass = 2;
+    {PROTOBUF_FIELD_OFFSET(singleTopic, _impl_.topicclass_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\23\11\12\0\0\0\0\0"
+    "hansolo.singleTopic"
+    "topicName"
+    "topicClass"
+  }},
+};
+
+::uint8_t* singleTopic::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:hansolo.singleTopic)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // string topicName = 1;
+  if (!this->_internal_topicname().empty()) {
+    const std::string& _s = this->_internal_topicname();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "hansolo.singleTopic.topicName");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
+  }
+
+  // string topicClass = 2;
+  if (!this->_internal_topicclass().empty()) {
+    const std::string& _s = this->_internal_topicclass();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "hansolo.singleTopic.topicClass");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:hansolo.singleTopic)
+  return target;
+}
+
+::size_t singleTopic::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:hansolo.singleTopic)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string topicName = 1;
+  if (!this->_internal_topicname().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_topicname());
+  }
+
+  // string topicClass = 2;
+  if (!this->_internal_topicclass().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_topicclass());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData singleTopic::_class_data_ = {
+    singleTopic::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* singleTopic::GetClassData() const {
+  return &_class_data_;
+}
+
+void singleTopic::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<singleTopic*>(&to_msg);
+  auto& from = static_cast<const singleTopic&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:hansolo.singleTopic)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_topicname().empty()) {
+    _this->_internal_set_topicname(from._internal_topicname());
+  }
+  if (!from._internal_topicclass().empty()) {
+    _this->_internal_set_topicclass(from._internal_topicclass());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void singleTopic::CopyFrom(const singleTopic& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:hansolo.singleTopic)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool singleTopic::IsInitialized() const {
+  return true;
+}
+
+::_pbi::CachedSize* singleTopic::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void singleTopic::InternalSwap(singleTopic* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.topicname_, &other->_impl_.topicname_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.topicclass_, &other->_impl_.topicclass_, arena);
+}
+
+::google::protobuf::Metadata singleTopic::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_coreConnection_2eproto_getter, &descriptor_table_coreConnection_2eproto_once,
+      file_level_metadata_coreConnection_2eproto[8]);
+}
+// ===================================================================
+
+class replyTopics::_Internal {
+ public:
+};
+
+replyTopics::replyTopics(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:hansolo.replyTopics)
+}
+inline PROTOBUF_NDEBUG_INLINE replyTopics::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : alltopics_{visibility, arena, from.alltopics_},
+        _cached_size_{0} {}
+
+replyTopics::replyTopics(
+    ::google::protobuf::Arena* arena,
+    const replyTopics& from)
+    : ::google::protobuf::Message(arena) {
+  replyTopics* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+
+  // @@protoc_insertion_point(copy_constructor:hansolo.replyTopics)
+}
+inline PROTOBUF_NDEBUG_INLINE replyTopics::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : alltopics_{visibility, arena},
+        _cached_size_{0} {}
+
+inline void replyTopics::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+replyTopics::~replyTopics() {
+  // @@protoc_insertion_point(destructor:hansolo.replyTopics)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void replyTopics::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
+}
+
+PROTOBUF_NOINLINE void replyTopics::Clear() {
+// @@protoc_insertion_point(message_clear_start:hansolo.replyTopics)
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.alltopics_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* replyTopics::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> replyTopics::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_replyTopics_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // repeated .hansolo.singleTopic alltopics = 1;
+    {::_pbi::TcParser::FastMtR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(replyTopics, _impl_.alltopics_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // repeated .hansolo.singleTopic alltopics = 1;
+    {PROTOBUF_FIELD_OFFSET(replyTopics, _impl_.alltopics_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::hansolo::singleTopic>()},
+  }}, {{
+  }},
+};
+
+::uint8_t* replyTopics::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:hansolo.replyTopics)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // repeated .hansolo.singleTopic alltopics = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_alltopics_size()); i < n; i++) {
+    const auto& repfield = this->_internal_alltopics().Get(i);
+    target = ::google::protobuf::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:hansolo.replyTopics)
+  return target;
+}
+
+::size_t replyTopics::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:hansolo.replyTopics)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .hansolo.singleTopic alltopics = 1;
+  total_size += 1UL * this->_internal_alltopics_size();
+  for (const auto& msg : this->_internal_alltopics()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+  }
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData replyTopics::_class_data_ = {
+    replyTopics::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* replyTopics::GetClassData() const {
+  return &_class_data_;
+}
+
+void replyTopics::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<replyTopics*>(&to_msg);
+  auto& from = static_cast<const replyTopics&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:hansolo.replyTopics)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_alltopics()->MergeFrom(
+      from._internal_alltopics());
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void replyTopics::CopyFrom(const replyTopics& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:hansolo.replyTopics)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool replyTopics::IsInitialized() const {
+  return true;
+}
+
+::_pbi::CachedSize* replyTopics::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void replyTopics::InternalSwap(replyTopics* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.alltopics_.InternalSwap(&other->_impl_.alltopics_);
+}
+
+::google::protobuf::Metadata replyTopics::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_coreConnection_2eproto_getter, &descriptor_table_coreConnection_2eproto_once,
+      file_level_metadata_coreConnection_2eproto[9]);
+}
+// ===================================================================
+
+class requestTopics::_Internal {
+ public:
+};
+
+requestTopics::requestTopics(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:hansolo.requestTopics)
+}
+inline PROTOBUF_NDEBUG_INLINE requestTopics::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : topicname_(arena, from.topicname_),
+        _cached_size_{0} {}
+
+requestTopics::requestTopics(
+    ::google::protobuf::Arena* arena,
+    const requestTopics& from)
+    : ::google::protobuf::Message(arena) {
+  requestTopics* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+  _impl_.status_ = from._impl_.status_;
+
+  // @@protoc_insertion_point(copy_constructor:hansolo.requestTopics)
+}
+inline PROTOBUF_NDEBUG_INLINE requestTopics::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : topicname_(arena),
+        _cached_size_{0} {}
+
+inline void requestTopics::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.status_ = {};
+}
+requestTopics::~requestTopics() {
+  // @@protoc_insertion_point(destructor:hansolo.requestTopics)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void requestTopics::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.topicname_.Destroy();
+  _impl_.~Impl_();
+}
+
+PROTOBUF_NOINLINE void requestTopics::Clear() {
+// @@protoc_insertion_point(message_clear_start:hansolo.requestTopics)
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.topicname_.ClearToEmpty();
+  _impl_.status_ = false;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* requestTopics::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 39, 2> requestTopics::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_requestTopics_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string topicName = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(requestTopics, _impl_.topicname_)}},
+    // bool status = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(requestTopics, _impl_.status_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(requestTopics, _impl_.status_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool status = 1;
+    {PROTOBUF_FIELD_OFFSET(requestTopics, _impl_.status_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+    // string topicName = 2;
+    {PROTOBUF_FIELD_OFFSET(requestTopics, _impl_.topicname_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\25\0\11\0\0\0\0\0"
+    "hansolo.requestTopics"
+    "topicName"
+  }},
+};
+
+::uint8_t* requestTopics::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:hansolo.requestTopics)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // bool status = 1;
+  if (this->_internal_status() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(
+        1, this->_internal_status(), target);
+  }
+
+  // string topicName = 2;
+  if (!this->_internal_topicname().empty()) {
+    const std::string& _s = this->_internal_topicname();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "hansolo.requestTopics.topicName");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:hansolo.requestTopics)
+  return target;
+}
+
+::size_t requestTopics::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:hansolo.requestTopics)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string topicName = 2;
+  if (!this->_internal_topicname().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_topicname());
+  }
+
+  // bool status = 1;
+  if (this->_internal_status() != 0) {
+    total_size += 2;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData requestTopics::_class_data_ = {
+    requestTopics::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* requestTopics::GetClassData() const {
+  return &_class_data_;
+}
+
+void requestTopics::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<requestTopics*>(&to_msg);
+  auto& from = static_cast<const requestTopics&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:hansolo.requestTopics)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_topicname().empty()) {
+    _this->_internal_set_topicname(from._internal_topicname());
+  }
+  if (from._internal_status() != 0) {
+    _this->_internal_set_status(from._internal_status());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void requestTopics::CopyFrom(const requestTopics& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:hansolo.requestTopics)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool requestTopics::IsInitialized() const {
+  return true;
+}
+
+::_pbi::CachedSize* requestTopics::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void requestTopics::InternalSwap(requestTopics* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.topicname_, &other->_impl_.topicname_, arena);
+        swap(_impl_.status_, other->_impl_.status_);
+}
+
+::google::protobuf::Metadata requestTopics::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_coreConnection_2eproto_getter, &descriptor_table_coreConnection_2eproto_once,
+      file_level_metadata_coreConnection_2eproto[10]);
 }
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace hansolo
