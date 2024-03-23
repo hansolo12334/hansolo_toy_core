@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hw_grpc_proto.dir/coreConnection.grpc.pb.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/build/coreConnection.grpc.pb.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build/coreConnection.grpc.pb.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hw_grpc_proto.dir/coreConnection.pb.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/build/coreConnection.pb.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build/coreConnection.pb.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hw_grpc_proto.dir/stdMsg.pb.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/build/stdMsg.pb.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build/stdMsg.pb.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hansolo_core.dir/src/hansolo_node_new.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_node_new.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_node_new.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hansolo_core.dir/src/hansolo_master_new.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_master_new.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_master_new.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hansolo_core.dir/src/hansolo_tcp.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_tcp.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_tcp.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hansolo_core.dir/src/hansolo_tcp_thread.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_tcp_thread.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/src/hansolo_tcp_thread.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hansolo_core.dir/src/wrap.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/src/wrap.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/src/wrap.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/test_new_core.dir/test_new_core.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_core.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_core.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/test_new_node.dir/test_new_node.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_node.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_node.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/test_new_node1.dir/test_new_node1.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_node1.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_node1.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/./include -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/test_new_node2.dir/test_new_node2.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_node2.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/test_new_node2.cc"
+}
+]

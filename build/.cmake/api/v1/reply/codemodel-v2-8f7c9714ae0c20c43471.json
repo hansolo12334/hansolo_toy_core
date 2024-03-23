@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "hansolo_thread_rebuild",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "hansolo_core::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hansolo_core-Debug-a3f0e40b56acfe9866cc.json",
+					"name" : "hansolo_core",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "hw_grpc_proto::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hw_grpc_proto-Debug-eb919676de86c56da1bd.json",
+					"name" : "hw_grpc_proto",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_new_core::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_new_core-Debug-19bc0c6363659c25db74.json",
+					"name" : "test_new_core",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_new_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_new_node-Debug-69f35a79d2ebc04d0378.json",
+					"name" : "test_new_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_new_node1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_new_node1-Debug-e2bf0b390734fb1238ec.json",
+					"name" : "test_new_node1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_new_node2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_new_node2-Debug-b6c0468a33ab8e3c0a24.json",
+					"name" : "test_new_node2",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+		"source" : "/home/hansolo/CplusplusLearn/hansolo_toy_core"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

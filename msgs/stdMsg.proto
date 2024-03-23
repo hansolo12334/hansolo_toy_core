@@ -1,0 +1,10 @@
+syntax="proto3";
+package hansolo_std;
+
+
+
+message std_msg{
+    int32 data=1;
+}
+
+

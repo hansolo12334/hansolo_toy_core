@@ -1,0 +1,96 @@
+syntax="proto3";
+package hansolo;
+
+// message hansoloClient{
+//    string clientName=1;
+//    int32 port=2;
+//    string ip_address=3;
+
+// }
+
+// message hansoloClients{
+//   repeated hansoloClient clit = 1;
+//   }
+
+// message firstTouchResultToClient{
+//      string clientName=1;
+//      int32 success=2;
+// }
+
+// message publisherCreateReqFromClient{
+//      string publish_name=1;
+//      string  clientName=2;
+// }
+
+// message publisherCreateAnsToClient{
+//      string clientName=1;
+//      int32 port=2;
+// }
+
+
+
+service Register{
+    rpc SayRegist (RegistRequest) returns (RegistReply){}
+
+    rpc RegistePublisher (RegistePublisherRequest) returns(RegistePublisherReply){}
+
+    rpc RegisteSubscriber (RegisteSubscriberRequest) returns(RegisteSubscriberReply){}
+
+    rpc RegistOffline  (OfflineRequest) returns (OfflineReply) {}
+
+}
+
+//请求返回的当前状态
+enum requestStatus{
+    RegisteSubscribeTargetOffline=0;
+    RegisteSubscribeSuccess=1;
+    RegistNodeAlreadyHaveSameNodeName=3;
+    RegistNodeSuccess=4;
+}
+
+// 申请注册时 向master发送自己的 节点名字
+message RegistRequest{
+    string nodeName=1;
+}
+//返回 提出请求的节点 的信息 和申请状态 状态类型
+message RegistReply{
+    string nodeName=2;
+    requestStatus registStatus=3;
+    string StatusType=4;
+}
+
+message RegistePublisherRequest{
+    string  nodeName=1;
+    string topicName=2;
+}
+message RegistePublisherReply{
+    string nodeName=1;
+    string topicName=2;
+    int32 port=3;
+    bool registStatus=4;
+}
+
+
+
+message RegisteSubscriberRequest{
+    string nodeName=1;
+    string topicName=2;
+}
+message RegisteSubscriberReply{
+    string nodeName=1;
+    string targetNodeName=2;
+    string topicName=3;
+    int32 port=4;
+    requestStatus registStatus=5;
+}
+
+
+message OfflineRequest{
+    string nodeName=1;
+    int32 port=2;
+}
+message OfflineReply{
+    bool status=1;
+    string nodeName=2;
+}
+
