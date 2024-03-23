@@ -9,6 +9,6 @@
 3. publish功能：自定义话题和数据类型发布消息，目前只实现int型
 4. subscribe功能：接收发布者消息
 5. 通过Protobuf实现自定义消息类型
-6. hansolotopic： 暂时实现list功能
+6. hansolotopic： 暂时实现list查询话题功能
 
 ![测试](./test/test.gif)
