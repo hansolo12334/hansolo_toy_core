@@ -48,7 +48,9 @@ using hansolo::requestStatus;
 
 
 
-
+// namespace hansolo_rt{
+//     class hansolo_node; 
+// };
 
 class hansolo_node
 {

@@ -15,7 +15,6 @@ void sub_callback(const hansolo_stdMsg &msg)
 int main(int argc,char **argv)
 {
     // absl::ParseCommandLine(argc, argv);
-
     hansolo_node client{"hansolo node"};
 
     HansoloPublisher<hansolo_stdMsg> pub= client.create_publisher<hansolo_stdMsg>("/test_node");
