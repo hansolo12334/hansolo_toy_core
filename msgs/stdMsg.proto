@@ -1,10 +1,13 @@
 syntax="proto3";
+// import "hansoloTime.proto";
+import "google/protobuf/timestamp.proto";
 package hansolo_std;
 
 
 
 message std_msg{
     int32 data=1;
+    google.protobuf.Timestamp timeStamp = 2;
 }
 
 

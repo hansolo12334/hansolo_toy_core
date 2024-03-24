@@ -85,6 +85,7 @@ public:
             std::string temp = std::string(buf, recv_len);
             M data_msg;
             data_msg.msg.ParseFromString(temp);
+            //从字节流中恢复数据结构 存入类中
             data_msg.write_msg();
 
             call_back(data_msg);

@@ -83,6 +83,10 @@
     "*.ipp": "cpp",
     "span": "cpp",
     "typeindex": "cpp",
-    "charconv": "cpp"
+    "charconv": "cpp",
+    "*.inc": "cpp",
+    "shared_mutex": "cpp",
+    "core": "cpp",
+    "*.txx": "cpp"
   }
 }

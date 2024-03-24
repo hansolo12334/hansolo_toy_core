@@ -8,14 +8,14 @@
 
 void sub_callback(const hansolo_stdMsg &msg)
 {
-    hDebug(Color::FG_DEFAULT) <<"node1 recevie data "<< msg.data;
+    hDebug(Color::FG_DEFAULT) <<"time: "<<msg.getYear()<<" node1 recevie data "<< msg.data;
     // std::cout << "node1 recevie data " << msg.data << std::endl;
     sleep(1);
 }
 
 void sub_callback1(const hansolo_stdMsg &msg)
 {
-    hDebug(Color::FG_DEFAULT) <<"node1 recevie data1 "<< msg.data;
+    hDebug(Color::FG_DEFAULT) <<"time: "<<msg.seconds<<" node1 recevie data1 "<< msg.data;
     // std::cout << "node1 recevie data " << msg.data << std::endl;
     sleep(2);
 }

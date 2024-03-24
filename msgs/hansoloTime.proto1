@@ -1,0 +1,17 @@
+syntax="proto3";
+import "google/protobuf/timestamp.proto";
+package hansoloTime;
+
+
+
+message hansolo_Time {
+    google.protobuf.Timestamp my_time = 1;
+}
+// message Time{
+//     string year=1;
+//     string month=2;
+//     string day=3;
+//     string hours=4;
+//     string minutes=5;
+//     string seconds=6;
+// }

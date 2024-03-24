@@ -6,7 +6,8 @@
 
 void sub_callback(const hansolo_stdMsg &msg)
 {
-    hDebug(Color::FG_DEFAULT) <<"node recevie data "<< msg.data;
+
+    hDebug(Color::FG_DEFAULT) <<"time: "<<msg.seconds<< " node recevie data "<< msg.data;
     // std::cout << "node recevie data " << msg.data << std::endl;
     sleep(2);
 }

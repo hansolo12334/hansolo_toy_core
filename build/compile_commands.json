@@ -6,6 +6,11 @@
 },
 {
   "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
+  "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/core -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/msg -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/tcp -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/tools -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hw_grpc_proto.dir/stdMsg.grpc.pb.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/build/stdMsg.grpc.pb.cc",
+  "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build/stdMsg.grpc.pb.cc"
+},
+{
+  "directory": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build",
   "command": "/usr/local/bin/g++ -DCARES_STATICLIB -I/home/hansolo/CplusplusLearn/hansolo_toy_core/build -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/core -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/msg -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/tcp -I/home/hansolo/CplusplusLearn/hansolo_toy_core/include/tools -isystem /usr/local/include/protobuf25_1/include -g -o CMakeFiles/hw_grpc_proto.dir/coreConnection.pb.cc.o -c /home/hansolo/CplusplusLearn/hansolo_toy_core/build/coreConnection.pb.cc",
   "file": "/home/hansolo/CplusplusLearn/hansolo_toy_core/build/coreConnection.pb.cc"
 },
