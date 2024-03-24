@@ -6,8 +6,9 @@ package hansolo_std;
 
 
 message std_msg{
-    int32 data=1;
-    google.protobuf.Timestamp timeStamp = 2;
+    string dataType=1;
+    int32 data=2;
+    google.protobuf.Timestamp timeStamp = 3;
 }
 
 

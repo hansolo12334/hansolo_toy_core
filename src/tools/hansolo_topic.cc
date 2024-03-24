@@ -34,3 +34,39 @@ void hansolo_topic::GetTopics()
     hDebug(Color::FG_RED) << "hansolo core未启动";
   }
 }
+
+void hansolo_topic::EchoTopic(const std::string &topic_name)
+{
+  requestEchoTopic request;
+  request.set_topicname(topic_name);
+
+  replyEchoTopic reply;
+  ClientContext context;
+
+  Status status = stub_->EchoTopic(&context, request, &reply);
+
+  if(status.ok()){
+    if(reply.status()){
+      init_tcp(reply.port(),request.topicname(),"hansoloTopic");
+    }
+    
+    hDebug(Color::FG_DEFAULT) << reply.port();
+  }
+  //
+  
+}
+
+
+
+// inline void hansolo_topic::echo_callback(const hansolo_msg_base &msg)
+// {
+//   msg.printMessage();
+// }
+
+// void hansolo_topic::init_tcp(int port,const std::string &topic_name,const std::string &node_name)
+// {
+//   my_tcp = new hansolo_tcp_thread(port,node_name,topic_name);
+
+
+//   my_tcp->topic_echo_start<hansolo_msg_base>(echo_callback);
+// }

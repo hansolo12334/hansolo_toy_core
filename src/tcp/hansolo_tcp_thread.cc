@@ -78,6 +78,8 @@ void hansolo_tcp_thread::server_update(int port)
     }
 }
 
+// template<typename T>
+// void hansolo_tcp_thread::topic_echo_start(void(*fp)(const T&))
 
 // void hansolo_tcp_thread::client_update(int port)
 // {

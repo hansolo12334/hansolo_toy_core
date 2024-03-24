@@ -235,3 +235,56 @@ ServerUnaryReactor *hansolo_master::GetTopics(CallbackServerContext *context,
     reactor->Finish(Status::OK);
     return reactor;
 }
+
+
+
+
+
+ ServerUnaryReactor *hansolo_master::EchoTopic(CallbackServerContext *context,
+                                                  const requestEchoTopic *request,
+                                                  replyEchoTopic *reply)
+{
+    //首先注册记录 hansolotopic 的节点名称
+    // auto find = std::find_if(all_hansoloTopic_nodes.begin(), all_hansoloTopic_nodes.end(), [=](const std::string &item){ 
+    //     return item == request->nodename();
+    // });
+    // //发现重名的hansolotopic
+    // if(find!=all_hansoloTopic_nodes.end()){
+    //     std::string newname = "hansoloTopic_" + std::to_string(hansoloTopicNums);
+    //     reply->set_nodename(newname);
+    //     hansoloTopicNums++;
+    // }
+    // else{
+    //     reply->set_nodename("");
+    // }
+    bool findTopic = false;
+    for (int i = 0; i < m_all_nodes.size(); i++)
+    {
+        for(auto pub:m_all_nodes[i].publish_topics){
+               if(pub.published_topic_name==request->topicname()){
+                   reply->set_port(pub.self_port);
+                   findTopic = true;
+                   break;
+               }
+        }
+    }
+    if(findTopic){
+        reply->set_status(true);
+    }
+    else{
+        reply->set_status(false);
+    }
+
+    ServerUnaryReactor *reactor = context->DefaultReactor();
+    reactor->Finish(Status::OK);
+    return reactor;
+}
+
+ServerUnaryReactor *hansolo_master::StopEchoTopic(CallbackServerContext *context,
+                                                const requestStopEchoTopic *request,
+                                                replyStopEchoTopic *reply)
+{
+    ServerUnaryReactor *reactor = context->DefaultReactor();
+    reactor->Finish(Status::OK);
+    return reactor;
+}

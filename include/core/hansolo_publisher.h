@@ -38,14 +38,21 @@ public:
     }
     ~HansoloPublisher(){}
 
+    google::protobuf::Any any;
+
     void publish(T &msg)
     {
         if(!my_tcp->already){
             return;
         }
         std::string temp;
-        msg.get_msg().SerializeToString(&temp);
+        //测试 any
+        
+        any.PackFrom(msg.get_msg());
+        // msg.get_msg().SerializeToString(&temp);
+        any.SerializeToString(&temp);
         my_tcp->sendData = temp;
+        any.Clear();
     }
 };
 

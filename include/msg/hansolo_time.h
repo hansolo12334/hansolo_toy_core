@@ -4,8 +4,9 @@
 
 #include <ctime>
 #include <unistd.h>
+#include"hansolo_msg_base.h"
 
-class hansoloTime
+class hansoloTime : public hansolo_msg_base
 {
 public:
   time_t seconds{};

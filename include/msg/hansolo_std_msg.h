@@ -10,14 +10,19 @@
 #include <unistd.h>
 
 #include"hansolo_time.h"
+#include"colormod.h"
 
+using Color::Code;
 
 class hansolo_stdMsg : public hansoloTime
 {
 public:
     hansolo_stdMsg(){}
     ~hansolo_stdMsg(){}
-    
+
+    hansolo_std::std_msg ss{};
+
+
     int data{};
     hansolo_std::std_msg msg{};
 
@@ -34,8 +39,10 @@ public:
         data = msg.data();
         seconds = msg.timestamp().seconds();
     }
-
-    
+    void printMessage() const
+    {
+        hDebug(Color::FG_DEFAULT) << data;
+    }
 };
 
 #endif

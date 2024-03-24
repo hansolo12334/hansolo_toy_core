@@ -52,12 +52,18 @@ using hansolo::singleTopic;
 using hansolo::replyTopics;
 using hansolo::requestTopics;
 
+using hansolo::replyEchoTopic;
+using hansolo::requestEchoTopic;
+
+using hansolo::replyStopEchoTopic;
+using hansolo::requestStopEchoTopic;
+
 class hansolo_master final : public Register::CallbackService
 {
 
 private:
     int m_port{4321};
-    std::unordered_map<std::string, int> m_node_names{};
+   
 
 
     struct node_publish_item
@@ -88,6 +94,8 @@ private:
     };
     std::vector<node_items> m_all_nodes{};
 
+    std::vector<std::string> all_hansoloTopic_nodes{};
+    int hansoloTopicNums{0};
 
 public:
     ServerUnaryReactor *SayRegist(CallbackServerContext *context,
@@ -110,6 +118,14 @@ public:
     ServerUnaryReactor *GetTopics(CallbackServerContext *context,
                                                   const requestTopics *request,
                                                   replyTopics *reply) override;
+
+    ServerUnaryReactor *EchoTopic(CallbackServerContext *context,
+                                                  const requestEchoTopic *request,
+                                                  replyEchoTopic *reply) override;
+
+    ServerUnaryReactor *StopEchoTopic(CallbackServerContext *context,
+                                                  const requestStopEchoTopic *request,
+                                                  replyStopEchoTopic *reply) override;
 };
 
 #endif

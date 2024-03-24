@@ -13,6 +13,10 @@ service Register{
 
     //实现topic 查询功能
     rpc GetTopics (requestTopics) returns(replyTopics){}
+
+    rpc EchoTopic (requestEchoTopic) returns (replyEchoTopic){}
+
+    rpc StopEchoTopic (requestStopEchoTopic) returns (replyStopEchoTopic){}
     
 
 }
@@ -83,4 +87,21 @@ message replyTopics{
 message requestTopics{
     bool status=1;
     string topicName=2;
+}
+
+message requestEchoTopic{
+    string topicName=1;
+    string nodeName=2;
+}
+message replyEchoTopic{
+    int32 port=1;
+    bool status=2;
+    string nodeName=3;
+}
+
+message requestStopEchoTopic{
+    string nodeName=1;
+}
+message replyStopEchoTopic{
+    bool status=1;
 }
