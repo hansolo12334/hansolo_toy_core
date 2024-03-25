@@ -49,7 +49,7 @@ class hansolo_topic
 {
 
 private:
-  hansolo_tcp_thread *my_tcp{nullptr};
+  hansolo_tcp_thread<google::protobuf::Any> *my_tcp{nullptr};
 
   
   static void echo_callback(const google::protobuf::Any &msg)
@@ -59,8 +59,8 @@ private:
 
   void init_tcp(int port, const std::string &topic_name, const std::string &node_name)
   {
-    my_tcp = new hansolo_tcp_thread(port, node_name, topic_name);
-    my_tcp->topic_echo_start<google::protobuf::Any>(echo_callback);
+    my_tcp = new hansolo_tcp_thread<google::protobuf::Any>(port, node_name, topic_name);
+    my_tcp->topic_echo_start(echo_callback);
   }
 
 public:

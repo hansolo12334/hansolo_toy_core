@@ -1,0 +1,23 @@
+syntax = 'proto3';
+import "google/protobuf/timestamp.proto";
+package hansolo_image;
+
+
+message Image {
+    bytes image_data = 1;
+    int32 height = 2;
+    int32 width = 3;
+    int64 frame = 4;
+    google.protobuf.Timestamp timeStamp = 5;
+}
+
+// message messageData {
+//     double timestamp = 1;
+//     Environment environment = 2;
+//     string sending_service = 3;
+//     string uuid = 4;
+//     string iso_date = 5;
+//     int64 offset = 6;
+//     int64 partition = 7;
+//     string trace_id = 8;
+// }

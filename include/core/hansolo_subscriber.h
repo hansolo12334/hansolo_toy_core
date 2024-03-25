@@ -6,6 +6,9 @@
 
 #include<functional>
 #include"colormod.h"
+
+
+template <typename M>
 class HansoloSubscriber
 {
 
@@ -16,7 +19,7 @@ private:
     std::string m_topic_name;
     int m_port{};
 
-    hansolo_tcp_thread *my_tcp{nullptr};
+    hansolo_tcp_thread<M> *my_tcp{nullptr};
 
 public:
     HansoloSubscriber(std::string topic_name,std::string node_name,int port)
@@ -24,9 +27,9 @@ public:
      , m_node_name{node_name}
      , m_port{port}
     {
-         my_tcp = new hansolo_tcp_thread{port,node_name,topic_name};
+         my_tcp = new hansolo_tcp_thread<M>{port,node_name,topic_name};
     }
-    template <typename M>
+    
     void init(std::function<void(const M&)> call_back){
 
         my_tcp->client_start(call_back);

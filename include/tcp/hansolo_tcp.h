@@ -53,6 +53,8 @@ public:
     bool tcp_server_update_once();
     bool tcp_server_update_once_send_msg(std::string &message);
 
+    bool tcp_server_update_once_send_msg_big_data(std::string &message);
+
 
     //tcp客户端
     int serverfd{};

@@ -19,7 +19,9 @@
 *.rar
 *.tar
 *.zip
-
+*.mp4
+*.avi
+*.flv
 # Logs and databases #
 ######################
 *.log

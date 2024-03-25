@@ -80,11 +80,11 @@ public:
     }
     //todo
     template<typename M>
-    HansoloSubscriber create_subscriber(std::string topic_name, void(*fp)(const M&))
+    HansoloSubscriber<M> create_subscriber(std::string topic_name, void(*fp)(const M&))
     {
         int port = RegisteSubscriber(topic_name);
-        HansoloSubscriber sub{topic_name, m_node_name, port};
-        sub.init<M>(fp);
+        HansoloSubscriber<M> sub{topic_name, m_node_name, port};
+        sub.init(fp);
         return sub;
     }
 

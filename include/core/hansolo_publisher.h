@@ -23,7 +23,7 @@ private:
     std::string m_topic_name;
     int m_port{};
 
-    hansolo_tcp_thread *my_tcp{nullptr};
+    hansolo_tcp_thread<T> *my_tcp{nullptr};
 
 
 
@@ -33,7 +33,7 @@ public:
         , m_topic_name{topic_name}
         , m_port{port}
     {
-        my_tcp = new hansolo_tcp_thread{port,node_name,topic_name};
+        my_tcp = new hansolo_tcp_thread<T>{port,node_name,topic_name};
         my_tcp->server_start();
     }
     ~HansoloPublisher(){}
@@ -50,7 +50,9 @@ public:
         
         any.PackFrom(msg.get_msg());
         // msg.get_msg().SerializeToString(&temp);
+        // std::cout << msg << std::endl;
         any.SerializeToString(&temp);
+     
         my_tcp->sendData = temp;
         any.Clear();
     }

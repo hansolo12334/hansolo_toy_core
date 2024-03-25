@@ -61,8 +61,8 @@ ssize_t Read(int fd, void *ptr, size_t nbytes)
 
 again:
     if ( (n = read(fd, ptr, nbytes)) == -1) {
-        if (errno == EINTR)
-            goto again;
+        if (errno == EINTR)//ENTER表示系统调用被中断 
+            goto again; //尝试重新读取
         else
             return -1;
     }
