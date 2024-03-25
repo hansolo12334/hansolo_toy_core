@@ -12,3 +12,4 @@
 6. hansolotopic：实现list查询话题功能 实现echo话题内容功能(暂时)
 
 ![测试](./test/test.gif)
+![测试2](./test/video.gif)
