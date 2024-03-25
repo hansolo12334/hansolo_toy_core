@@ -26,11 +26,15 @@ public:
     std::string data{};
     hansolo_image::Image  msg{};
     int frameId{};
+    int height{};
+    int width{};
     hansolo_image::Image get_msg()
     {
 
       msg.set_image_data(data);
       msg.set_frame(frameId);
+      msg.set_height(height);
+      msg.set_width(width);
 
       auto nowTime = msg.mutable_timestamp();
       nowTime->set_nanos(0);
@@ -41,6 +45,9 @@ public:
     void write_msg(){
       data = msg.image_data();
       frameId = msg.frame();
+      width = msg.width();
+      height = msg.height();
+      
       seconds = msg.timestamp().seconds();
     }
     void printMessage() const

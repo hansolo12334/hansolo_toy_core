@@ -244,7 +244,7 @@ public:
         int sucess = my_tcp->init_client_tcp(m_port);
 
         hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " subscriber启动";
-        // M data_msg;
+     
         std::thread t(&hansolo_tcp_thread::update_callback, this, call_back);
 
         t.detach();

@@ -11,19 +11,13 @@
 
 void sub_callback(const hansolo_imageMsg &msg)
 {
-  std::string decode{};
+
   hansoloImageTools tool;
-  // decode=tool.base64_decode(msg.data);
-  // decode = msg.data;
-  if(msg.data.length()<=0){
+
+  cv::Mat img = tool.binaryImage2Mat(msg.data);
+  if(img.empty()){
     return;
   }
-  std::vector<unsigned char> imageDataVec(msg.data.begin(), msg.data.end());
-  cv::Mat img = cv::imdecode(imageDataVec, cv::IMREAD_COLOR);
-   if (img.empty()) {
-    std::cerr << "无法加载图片。" << std::endl;
-    return;
-   }
   hDebug(Color::BG_DEFAULT) << msg.frameId;
   // cv::resize(img, img, cv::Size(img.size[1]/6,img.size[0]/6));
   cv::imshow("Image", img);
@@ -32,6 +26,7 @@ void sub_callback(const hansolo_imageMsg &msg)
     return;
   }   
 }
+
 
 
 int main(int argc,char **argv)
