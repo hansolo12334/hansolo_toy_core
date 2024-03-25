@@ -41,7 +41,12 @@ public:
     }
     void printMessage() const
     {
-        hDebug(Color::FG_DEFAULT) << data;
+        hDebug(Color::FG_DEFAULT) <<
+        "---\n"<<
+        "std_msg:\n"<<
+        "timeStamp:"<<
+        ' '<<seconds<<
+        "\ndata: " << data;
     }
 };
 

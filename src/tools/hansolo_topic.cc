@@ -1,17 +1,25 @@
 #include"hansolo_topic.h"
 
 ABSL_FLAG(std::string, target, "localhost:50051", "服务端地址");
+hansolo_topic *g_topic = nullptr;
+void shutdown(int signum);
 
 hansolo_topic::hansolo_topic()
 {
   stub_ = Register::NewStub(grpc::CreateChannel(absl::GetFlag(FLAGS_target), grpc::InsecureChannelCredentials()));
+  g_topic = this;
+  signal(SIGINT, shutdown);
 }
-
-
 
 hansolo_topic::~hansolo_topic()
 {
 
+}
+
+void shutdown(int signum)
+{
+  hDebug(Color::FG_RED) << "正在关闭";
+  g_topic->Close();
 }
 
 void hansolo_topic::GetTopics()
@@ -50,7 +58,7 @@ void hansolo_topic::EchoTopic(const std::string &topic_name)
       init_tcp(reply.port(),request.topicname(),"hansoloTopic");
     }
     
-    hDebug(Color::FG_DEFAULT) << reply.port();
+    // hDebug(Color::FG_DEFAULT) << reply.port();
   }
   //
   

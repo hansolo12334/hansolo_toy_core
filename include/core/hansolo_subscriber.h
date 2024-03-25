@@ -30,6 +30,12 @@ public:
          my_tcp = new hansolo_tcp_thread<M>{port,node_name,topic_name};
     }
     
+    void shutdown(){
+        if(my_tcp!=nullptr){
+            my_tcp->end();
+        }
+    }
+
     void init(std::function<void(const M&)> call_back){
 
         my_tcp->client_start(call_back);

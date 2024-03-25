@@ -52,7 +52,7 @@ public:
     }
     void printMessage() const
     {
-        hDebug(Color::FG_DEFAULT) << "image data";
+      hDebug(Color::FG_DEFAULT) << "---\nimage data: \ntimeStamp: "<<seconds<< "\nframeId: " << frameId << "\nwidth: " << width << "\nheight: " << height;
     }
 };
 

@@ -195,13 +195,30 @@ bool hansolo_tcp::tcp_server_update_once_send_msg_big_data(std::string &message)
                 memset(header,'\0',sizeof(size_t));// 八位 全部填充为 0
                 memcpy(header, (char *)&msg_size, sizeof(size_t));
                 //先发送包大小
-                Write(sockfd, header, sizeof(size_t));
+                size_t error_n=Write(sockfd, header, sizeof(size_t));
+
+                if(error_n==-2){
+                    std::cout << "尝试写入关闭的管道\n";
+                     /* connection closed by client */
+                    Close(sockfd);
+                    FD_CLR(sockfd, &allset);
+                    client[i] = -1;
+                    continue;
+                }
                 //切割数据 分次发送
                 size_t n = 0;
                 size_t offset = 0;
                 while (msg_size > 0)
                 {
                     n = Write(sockfd, message.data()+offset, msg_size);
+                    if(n==-2){
+                        std::cout << "尝试写入关闭的管道\n";
+                        /* connection closed by client */
+                        Close(sockfd);
+                        FD_CLR(sockfd, &allset);
+                        client[i] = -1;
+                        break;
+                    }
                     msg_size -= n;
                     offset += n;
                     // std::cout << n << std::endl;

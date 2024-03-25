@@ -74,11 +74,18 @@ ssize_t Write(int fd, const void *ptr, size_t nbytes)
     ssize_t n;
 
 again:
-    if ( (n = write(fd, ptr, nbytes)) == -1) {
-        if (errno == EINTR)
+    n = write(fd, ptr, nbytes);
+    if (n == -1)
+    {
+        if (errno == EINTR){
             goto again;
-        else
+        }//ENTER表示系统调用被中断 
+        else if (errno == EPIPE){//试图写入一个已经关闭的管道或者socket
+            return -2;
+        }
+        else{
             return -1;
+        }
     }
     return n;
 }

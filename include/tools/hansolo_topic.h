@@ -67,8 +67,11 @@ public:
   hansolo_topic();
   ~hansolo_topic();
 
-
-  
+  void Close(){
+    if(my_tcp){
+      my_tcp->end();
+    }
+  }
 
   void GetTopics();
   void EchoTopic(const std::string &topic_name);

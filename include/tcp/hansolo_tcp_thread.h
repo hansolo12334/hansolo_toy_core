@@ -143,9 +143,12 @@ public:
                 // exit(EXIT_FAILURE);
             }
             bzero(buf, sizeof(buf));
-            // std::cout << sizeof(buf) << ' ' << strlen(buf) << std::endl;
-            int recv_len = recv(my_tcp->serverfd, buf, sizeof(buf), 0);
-            if (recv_len <= 0)
+            // 第一次接收发来的数据大小
+            char buffer_header[sizeof(size_t)] = {0};
+            int data_size = recv(my_tcp->serverfd, buffer_header, sizeof(size_t), 0);
+            // std::cout << data_size << std::endl;
+
+            if (data_size <= 0)
             {
                 Close(my_tcp->serverfd);
                 int sucess = my_tcp->init_client_tcp(m_port);
@@ -154,26 +157,46 @@ public:
                 // close(my_tcp->serverfd);
                 // exit(EXIT_FAILURE);
             }
-            std::string temp = std::string(buf, recv_len);
+            // 开始接收发来的数据包
+            size_t msg_size;
+            memcpy(&msg_size, buffer_header, sizeof(size_t)); // sizeof(size_t) => 8
+
+            char *buffer_msg = (char *)malloc(msg_size * sizeof(char));
+            memset(buffer_msg, '\0', sizeof(char) * msg_size);
+            int length = 0;
+            for (length = 0; msg_size != 0; length += data_size)
+            {
+                // 客户端第二次发送来的才是数据
+                data_size = recv(my_tcp->serverfd, buffer_msg + length, msg_size, 0);
+                msg_size -= data_size;
+                // std::cout << data_size << std::endl;
+            }
+            std::string temp = std::string(buffer_msg, length);
+            free(buffer_msg);
 
             // data_msg.msg.ParseFromString(temp);
             // 从字节流中恢复数据结构 存入类中
             // data_msg.write_msg();
 
             // call_back(data_msg);
-            any.ParseFromString(temp);
-            if (!findAnyRealType)
             {
-                hDebug(Color::BG_DEFAULT) << any.type_url();
-                findAnyRealType = true;
-                func = topic_type_map[any.type_url()];
-            }
+                std::lock_guard<std::mutex> data_lock(data_mu);
+                any.ParseFromString(temp);
+                if (!findAnyRealType)
+                {
+                    hDebug(Color::BG_DEFAULT) << any.type_url();
+                    findAnyRealType = true;
+                    func = topic_type_map[any.type_url()];
+                }
 
-            if (findAnyRealType)
-            {
-                func(any);
+                if (findAnyRealType)
+                {
+                    func(any);
+                }
             }
         }
+        //关闭节点
+        Close(my_tcp->serverfd);
     }
 
   
@@ -317,6 +340,7 @@ public:
             }
             // call_back(data_msg);
         }
+        Close(my_tcp->serverfd);
     }
 
   

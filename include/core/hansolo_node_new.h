@@ -85,9 +85,10 @@ public:
         int port = RegisteSubscriber(topic_name);
         HansoloSubscriber<M> sub{topic_name, m_node_name, port};
         sub.init(fp);
+        
         return sub;
     }
-
+    
     // static hansolo_node* instancePtr;
 // private:
 public:
