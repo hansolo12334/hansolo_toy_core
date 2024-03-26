@@ -80,7 +80,7 @@ public:
     }
     //todo
     template<typename M>
-    HansoloSubscriber<M> create_subscriber(std::string topic_name, void(*fp)(const M&))
+    HansoloSubscriber<M> create_subscriber(std::string topic_name, void(*fp)(const std::shared_ptr<M const>&))
     {
         int port = RegisteSubscriber(topic_name);
         HansoloSubscriber<M> sub{topic_name, m_node_name, port};

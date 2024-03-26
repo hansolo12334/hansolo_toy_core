@@ -5,7 +5,7 @@
 class hansolo_msg_base
 {
 public:
-  int x = 0;
+  bool isEmpty = true;
 
   virtual void printMessage() const = 0;
 };

@@ -20,7 +20,7 @@ public:
     hansolo_stdMsg(){}
     ~hansolo_stdMsg(){}
 
-    hansolo_std::std_msg ss{};
+    // hansolo_std::std_msg ss{};
 
 
     int data{};
@@ -32,12 +32,13 @@ public:
         auto nowTime = msg.mutable_timestamp();
         nowTime->set_nanos(0);
         nowTime->set_seconds(time(NULL));
-  
+        isEmpty = false;
         return msg;
     }
     void write_msg(){
         data = msg.data();
         seconds = msg.timestamp().seconds();
+        isEmpty = false;
     }
     void printMessage() const
     {

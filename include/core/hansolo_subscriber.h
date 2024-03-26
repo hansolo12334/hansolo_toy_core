@@ -36,7 +36,7 @@ public:
         }
     }
 
-    void init(std::function<void(const M&)> call_back){
+    void init(const std::function<void(const std::shared_ptr<M const>&)> &call_back){
 
         my_tcp->client_start(call_back);
 

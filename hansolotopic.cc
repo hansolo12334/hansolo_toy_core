@@ -25,6 +25,7 @@ int main(int argc,char **argv)
   if(posArgv.size()==3 && std::string(posArgv[1],strlen(posArgv[1])) =="echo"){
     topic.EchoTopic(posArgv[2]);
   }
+ 
 
   return 0;
 }

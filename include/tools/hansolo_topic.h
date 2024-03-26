@@ -52,7 +52,7 @@ private:
   hansolo_tcp_thread<google::protobuf::Any> *my_tcp{nullptr};
 
   
-  static void echo_callback(const google::protobuf::Any &msg)
+  static void echo_callback(const std::shared_ptr<google::protobuf::Any const> &msg)
   {
     // msg.printMessage();
   }

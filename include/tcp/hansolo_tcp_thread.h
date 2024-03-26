@@ -41,7 +41,8 @@ private:
     bool findAnyRealType = false;
     std::function<void(google::protobuf::Any &)> func;
 
-    M msg_data;
+    std::shared_ptr<M> msg_data = std::make_shared<M>();
+    // constM msg_data;
 
 public:
   
@@ -113,7 +114,7 @@ public:
     }
 
    
-    void topic_echo_start(void (*fp)(const M &))
+    void topic_echo_start(void (*fp)(const std::shared_ptr<M const>&))
     {
         int sucess = my_tcp->init_client_tcp(m_port);
         hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " hansoloTopic启动";
@@ -198,70 +199,8 @@ public:
         //关闭节点
         Close(my_tcp->serverfd);
     }
-
-  
-    // void client_update(std::function<void(const M &)> call_back)
-    // {
-    //     // 如果初始化失败 重复
-    //     int sucess = my_tcp->init_client_tcp(m_port);
-
-    //     hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " subscriber启动";
-    //     while (1)
-    //     {
-    //         if (!m_stopE)
-    //         {
-    //             std::this_thread::sleep_for(std::chrono::milliseconds(1));
-    //             std::unique_lock<std::mutex> lock(mu);
-    //             m_cv.wait(lock, [this]
-    //                       { return !m_pause; });
-    //         }
-    //         if (m_stopE)
-    //         {
-    //             break;
-    //         }
-
-    //         char buf[1024] = {'h'};
-    //         int send_len = send(my_tcp->serverfd, (uint8_t *)buf, strlen(buf), 0);
-    //         if (send_len <= 0)
-    //         {
-    //             Close(my_tcp->serverfd);
-    //             int sucess = my_tcp->init_client_tcp(m_port);
-    //             continue;
-    //             // printf("tcp_send error!\n");
-    //             // close(my_tcp->serverfd);
-    //             // exit(EXIT_FAILURE);
-    //         }
-    //         bzero(buf, sizeof(buf));
-    //         // std::cout << sizeof(buf) << ' ' << strlen(buf) << std::endl;
-
-    //         int recv_len = recv(my_tcp->serverfd, buf, sizeof(buf), 0);
-    //         // std::cout << recv_len << std::endl;
-    //         if (recv_len <= 0)
-    //         {
-    //             Close(my_tcp->serverfd);
-    //             int sucess = my_tcp->init_client_tcp(m_port);
-    //             continue;
-    //             // printf("tcp_receive error!\n");
-    //             // close(my_tcp->serverfd);
-    //             // exit(EXIT_FAILURE);
-    //         }
-    //         std::string temp = std::string(buf, recv_len);
-
-    //         any.ParseFromString(temp);
-
-    //         M data_msg;
-    //         any.UnpackTo(&data_msg.msg);
-    //         any.Clear();
-    //         // data_msg.msg.ParseFromString(temp);
-    //         // 从字节流中恢复数据结构 存入类中
-    //         data_msg.write_msg();
-    //         // hDebug(Color::FG_BLUE) << any.type_url();
-    //         call_back(data_msg);
-    //     }
-    // }
-
     
-    void client_update_data_big(std::function<void(const M &)> call_back)
+    void client_update_data_big(const std::function<void(const std::shared_ptr<M const>&)> &call_back)
     {
         // 如果初始化失败 重复
         int sucess = my_tcp->init_client_tcp(m_port);
@@ -331,12 +270,12 @@ public:
             {
             std::lock_guard<std::mutex> data_lock(data_mu);
             any.ParseFromString(temp);
-            any.UnpackTo(&msg_data.msg);
+            any.UnpackTo(&msg_data->msg);
             any.Clear();
             // data_msg.msg.ParseFromString(temp);
             // 从字节流中恢复数据结构 存入类中
-            msg_data.write_msg();
-            hDebug(Color::FG_BLUE) << "写data "<<msg_data.getSecond();
+            msg_data->write_msg();
+            hDebug(Color::FG_BLUE) << "写data "<<msg_data->getSecond();
             }
             // call_back(data_msg);
         }
@@ -344,7 +283,7 @@ public:
     }
 
   
-    void client_start(std::function<void(const M &)> call_back)
+    void client_start(const std::function<void(const std::shared_ptr<M const>&)> &call_back)
     {
         std::thread t(&hansolo_tcp_thread::client_update_data_big, this, call_back);
         t.detach();
@@ -352,7 +291,7 @@ public:
 
 
  
-    void update_callback(std::function<void(const M &)> call_back)
+    void update_callback(const std::function<void(const std::shared_ptr<M const>&)> &call_back)
     {
         while (1)
         {
@@ -372,7 +311,10 @@ public:
                     std::lock_guard<std::mutex> data_lock(data_mu);
                     // data = msg_data;
                     hDebug(Color::FG_BLUE) << "读data ";
-                    call_back(msg_data);
+                    if(!msg_data->isEmpty){
+                        call_back(msg_data);
+                    }
+                    msg_data->isEmpty = true;
                 }
                 
             }

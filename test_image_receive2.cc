@@ -9,16 +9,16 @@
 #include"hansolo_image_msg.h"
 
 
-void sub_callback(const hansolo_imageMsg &msg)
+void sub_callback(const std::shared_ptr<hansolo_imageMsg const> &msg)
 {
 
   hansoloImageTools tool;
 
-  cv::Mat img = tool.binaryImage2Mat(msg.data);
+  cv::Mat img = tool.binaryImage2Mat(msg->data);
   if(img.empty()){
     return;
   }
-  hDebug(Color::BG_DEFAULT) << msg.frameId;
+  hDebug(Color::BG_DEFAULT) << msg->frameId;
   // cv::resize(img, img, cv::Size(img.size[1]/6,img.size[0]/6));
   cv::imshow("Image", img);
 

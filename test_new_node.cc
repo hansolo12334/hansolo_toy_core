@@ -4,10 +4,10 @@
 #include"hansolo_std_msg.h"
 
 
-void sub_callback(const hansolo_stdMsg &msg)
+void sub_callback(const std::shared_ptr<hansolo_stdMsg const> &msg)
 {
 
-    hDebug(Color::FG_DEFAULT) <<"time: "<<msg.seconds<< " node recevie data "<< msg.data;
+    hDebug(Color::FG_DEFAULT) <<"time: "<<msg->seconds<< " node recevie data "<< msg->data;
     // std::cout << "node recevie data " << msg.data << std::endl;
     sleep(2);
 }

@@ -6,9 +6,9 @@
 
 #include"hansolo_publisher.h"
 
-void sub_callback(const hansolo_stdMsg &msg)
+void sub_callback(const std::shared_ptr<hansolo_stdMsg const> &msg)
 {
-    hDebug(Color::FG_DEFAULT) <<"time: "<<msg.seconds<<" node2 recevie data "<< msg.data;
+    hDebug(Color::FG_DEFAULT) <<"time: "<<msg->seconds<<" node2 recevie data "<< msg->data;
     sleep(1);
 }
 
