@@ -15,3 +15,19 @@ else
   cmake -B ./build
   cmake --build ./build
 fi
+
+_hansolotopic()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="list echo"
+    # opts="$(./hansolotopic list)"
+
+    if [[ ${cur} == * ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+}
+complete -F _hansolotopic ./hansolotopic

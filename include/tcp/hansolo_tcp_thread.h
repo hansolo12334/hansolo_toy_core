@@ -275,7 +275,7 @@ public:
             // data_msg.msg.ParseFromString(temp);
             // 从字节流中恢复数据结构 存入类中
             msg_data->write_msg();
-            hDebug(Color::FG_BLUE) << "写data "<<msg_data->getSecond();
+            // hDebug(Color::FG_BLUE) << "写data "<<msg_data->getSecond();
             }
             // call_back(data_msg);
         }
@@ -310,7 +310,7 @@ public:
                 {
                     std::lock_guard<std::mutex> data_lock(data_mu);
                     // data = msg_data;
-                    hDebug(Color::FG_BLUE) << "读data ";
+                    // hDebug(Color::FG_BLUE) << "读data ";
                     if(!msg_data->isEmpty){
                         call_back(msg_data);
                     }
