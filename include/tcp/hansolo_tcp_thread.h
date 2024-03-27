@@ -35,6 +35,7 @@ private:
     hansolo_tcp *my_tcp{nullptr};
 
     int m_port{};
+    const char *m_ip{NULL};
     std::string m_node_name;
     std::string m_topic_name;
     google::protobuf::Any any;
@@ -49,8 +50,15 @@ public:
     std::string sendData{};
     bool already{false};
 
+    hansolo_tcp_thread(int port, std::string node_name, std::string topic_name,const char *ip)
+        : m_port{port}, m_node_name{node_name}, m_topic_name{topic_name}, 
+        m_ip{ip},
+        my_tcp{new hansolo_tcp{}}
+    {
+    }
     hansolo_tcp_thread(int port, std::string node_name, std::string topic_name)
-        : m_port{port}, m_node_name{node_name}, m_topic_name{topic_name}, my_tcp{new hansolo_tcp{}}
+    : m_port{port}, m_node_name{node_name}, m_topic_name{topic_name}, 
+    my_tcp{new hansolo_tcp{}}
     {
     }
 
@@ -60,7 +68,7 @@ public:
 
     void server_start()
     {
-        std::thread t(&hansolo_tcp_thread::server_update, this, m_port);
+        std::thread t(&hansolo_tcp_thread::server_update, this, m_port,m_ip);
         t.detach();
     }
 
@@ -84,9 +92,11 @@ public:
         m_cv.notify_one();
     }
 
-    void server_update(int port)
-    {
-        my_tcp->init_server_tcp(port);
+    void server_update(int port,const char *ip)
+    {   
+     
+        my_tcp->init_server_tcp(port,ip);
+       
         hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " publisher启动";
         while (1)
         {
@@ -115,7 +125,7 @@ public:
    
     void topic_echo_start(void (*fp)(const M &))
     {
-        int sucess = my_tcp->init_client_tcp(m_port);
+        int sucess = my_tcp->init_client_tcp(m_port,m_ip);
         hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " hansoloTopic启动";
         while (1)
         {
@@ -136,7 +146,7 @@ public:
             if (send_len <= 0)
             {
                 Close(my_tcp->serverfd);
-                int sucess = my_tcp->init_client_tcp(m_port);
+                int sucess = my_tcp->init_client_tcp(m_port,m_ip);
                 continue;
                 // printf("tcp_send error!\n");
                 // close(my_tcp->serverfd);
@@ -151,7 +161,7 @@ public:
             if (data_size <= 0)
             {
                 Close(my_tcp->serverfd);
-                int sucess = my_tcp->init_client_tcp(m_port);
+                int sucess = my_tcp->init_client_tcp(m_port,m_ip);
                 continue;
                 // printf("tcp_receive error!\n");
                 // close(my_tcp->serverfd);
@@ -264,7 +274,7 @@ public:
     void client_update_data_big(std::function<void(const M &)> call_back)
     {
         // 如果初始化失败 重复
-        int sucess = my_tcp->init_client_tcp(m_port);
+        int sucess = my_tcp->init_client_tcp(m_port,m_ip);
 
         hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " subscriber启动";
      
@@ -290,7 +300,7 @@ public:
             if (send_len <= 0)
             {
                 Close(my_tcp->serverfd);
-                int sucess = my_tcp->init_client_tcp(m_port);
+                int sucess = my_tcp->init_client_tcp(m_port,m_ip);
                 continue;
                 // printf("tcp_send error!\n");
                 // close(my_tcp->serverfd);
@@ -306,7 +316,7 @@ public:
             if (data_size <= 0)
             {
                 Close(my_tcp->serverfd);
-                int sucess = my_tcp->init_client_tcp(m_port);
+                int sucess = my_tcp->init_client_tcp(m_port,m_ip);
                 continue;
                 // printf("tcp_receive error!\n");
                 // close(my_tcp->serverfd);

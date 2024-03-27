@@ -55,11 +55,10 @@ using hansolo::requestStatus;
 class hansolo_node
 {
 public:
+    hansolo_node(std::string node_name,int argc,char **argv);
     hansolo_node(std::string node_name);
+
     ~hansolo_node();
-
-
-
 
     bool SayRegist(const std::string &user);
 
@@ -75,7 +74,7 @@ public:
     {
         int port = RegistePublisher(topic_name);
 
-        HansoloPublisher<T> pub{m_node_name,topic_name,port};
+        HansoloPublisher<T> pub{m_node_name,topic_name,port,m_listen_ip};
         return pub;
     }
     //todo
@@ -83,7 +82,7 @@ public:
     HansoloSubscriber<M> create_subscriber(std::string topic_name, void(*fp)(const M&))
     {
         int port = RegisteSubscriber(topic_name);
-        HansoloSubscriber<M> sub{topic_name, m_node_name, port};
+        HansoloSubscriber<M> sub{topic_name, m_node_name, port,m_listen_ip};
         sub.init(fp);
         
         return sub;
@@ -98,9 +97,9 @@ public:
     // std::vector<HansoloPublisher> m_pubs{};
     std::string m_node_name{};
 
-
-
+private:
+    const char* m_ip{NULL};
+    const char *m_listen_ip{NULL};
 };
-
 
 #endif

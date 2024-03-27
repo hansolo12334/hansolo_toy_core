@@ -5,9 +5,11 @@
 //          参数类型，参数名， 默认值， 备注。
 ABSL_FLAG(uint16_t, port, 50051, "用于服务端的端口");
 
-void RunServer(uint16_t port)
-{
-    std::string server_address = absl::StrFormat("0.0.0.0:%d", port);
+void RunServer(std::string ip, uint16_t port)
+{   
+    std::string addr=ip+':'+std::to_string(port);
+    std::string server_address = absl::StrFormat(addr.c_str());
+    // std::string server_address = absl::StrFormat("0.0.0.0:%d", port);
     hansolo_master master;
 
 
@@ -28,5 +30,12 @@ void RunServer(uint16_t port)
 
 int main(int argc,char **argv)
 {
-    RunServer(absl::GetFlag(FLAGS_port));
+    auto posArgv=absl::ParseCommandLine(argc, argv);
+
+    if(posArgv.size()==1){
+        RunServer("0.0.0.0",absl::GetFlag(FLAGS_port));
+    }
+    else if(posArgv.size()==2){
+        RunServer(posArgv[1],50051);
+    }
 }

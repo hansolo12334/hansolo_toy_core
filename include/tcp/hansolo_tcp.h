@@ -48,7 +48,7 @@ public:
     struct sockaddr_in  cliaddr, servaddr;
 
 
-    bool init_server_tcp(int port);
+    bool init_server_tcp(int port,const char* ip);
 
     bool tcp_server_update_once();
     bool tcp_server_update_once_send_msg(std::string &message);
@@ -58,7 +58,7 @@ public:
 
     //tcp客户端
     int serverfd{};
-    bool init_client_tcp(int port);
+    bool init_client_tcp(int port,const char* ip);
 };
 
 

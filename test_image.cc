@@ -9,14 +9,14 @@
 #include"image_tools.h"
 #include"hansolo_image_msg.h"
 
-int main()
+int main(int argc,char **argv)
 {
 
   std::string videoPath{"/home/hansolo/CplusplusLearn/hansolo_toy_core/test/2.mp4"};
   hansoloImageTools imgTool{videoPath};
   
 
-  hansolo_node node{"image_node"};
+  hansolo_node node{"image_node",argc,argv};
   auto pub = node.create_publisher<hansolo_imageMsg>("/image_pub");
 
   hansolo_imageMsg img;

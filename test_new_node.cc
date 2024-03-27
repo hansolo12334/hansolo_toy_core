@@ -14,8 +14,9 @@ void sub_callback(const hansolo_stdMsg &msg)
 
 int main(int argc,char **argv)
 {
-    // absl::ParseCommandLine(argc, argv);
-    hansolo_node client{"hansolo node"};
+    auto posArgv=absl::ParseCommandLine(argc, argv);
+
+    hansolo_node client{"hansolo node",argc,argv};
 
     HansoloPublisher<hansolo_stdMsg> pub= client.create_publisher<hansolo_stdMsg>("/test_node");
     HansoloPublisher<hansolo_stdMsg> pub1= client.create_publisher<hansolo_stdMsg>("/test_node11");

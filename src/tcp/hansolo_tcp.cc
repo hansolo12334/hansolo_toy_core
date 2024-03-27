@@ -9,13 +9,18 @@ hansolo_tcp::~hansolo_tcp()
 }
 
 
-bool hansolo_tcp::init_server_tcp(int port)
+bool hansolo_tcp::init_server_tcp(int port,const char* ip)
 {
     listenfd = Socket(AF_INET, SOCK_STREAM, 0);
     bzero(&servaddr, sizeof(servaddr));
 
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    if(ip==NULL){
+        servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    }
+    else{
+        servaddr.sin_addr.s_addr = inet_addr(ip);
+    }
     servaddr.sin_port = htons(port);
 
     Bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
@@ -324,14 +329,20 @@ bool hansolo_tcp::tcp_server_update_once()
 /// @brief tcp客户端实现
 /// @param port
 /// @return
-bool hansolo_tcp::init_client_tcp(int port)
+bool hansolo_tcp::init_client_tcp(int port,const char* ip)
 {
     serverfd = Socket(AF_INET, SOCK_STREAM, 0);
     bzero(&servaddr, sizeof(struct sockaddr));
 
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(port);
-    servaddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+    if(ip==NULL){
+        servaddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+    }
+    else{
+        servaddr.sin_addr.s_addr = inet_addr(ip);
+    }
+    
 
     while(!Connect(serverfd, (struct sockaddr *)&servaddr, sizeof(struct sockaddr))){
 

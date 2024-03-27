@@ -71,7 +71,8 @@ public:
       h_img.data.clear();
       return h_img;
     }
-
+    cv::resize(img, img, cv::Size(img.size().width / 3, img.size().height/ 3));
+    
     std::vector<uchar> buf;
     cv::imencode(".jpg", img, buf);
     std::string binaryImage(buf.begin(), buf.end());

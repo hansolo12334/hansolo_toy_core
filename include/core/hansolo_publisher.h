@@ -22,18 +22,20 @@ private:
     std::string m_node_name;
     std::string m_topic_name;
     int m_port{};
+    const char *m_ip{NULL};
 
     hansolo_tcp_thread<T> *my_tcp{nullptr};
 
 
 
 public:
-    HansoloPublisher(std::string node_name, std::string topic_name, int port)
+    HansoloPublisher(std::string node_name, std::string topic_name, int port,const char *ip=NULL)
         : m_node_name{node_name}
         , m_topic_name{topic_name}
         , m_port{port}
+        , m_ip{ip}
     {
-        my_tcp = new hansolo_tcp_thread<T>{port,node_name,topic_name};
+        my_tcp = new hansolo_tcp_thread<T>{port,node_name,topic_name,m_ip};
         my_tcp->server_start();
     }
     ~HansoloPublisher(){}

@@ -1,13 +1,45 @@
 #include"hansolo_node_new.h"
 
+// ABSL_FLAG(std::string, target, "192.168.144.2:50051", "服务端地址");
 ABSL_FLAG(std::string, target, "localhost:50051", "服务端地址");
 hansolo_node *g_node = nullptr;
 void RegistOffline(int signum);
 
+hansolo_node::hansolo_node(std::string node_name,int argc,char **argv)
+     :  m_node_name{node_name}
+{
+    auto posArgv=absl::ParseCommandLine(argc, argv);
+    if(posArgv.size()<=1){// ip由系统决定
+         stub_ = Register::NewStub(grpc::CreateChannel(absl::GetFlag(FLAGS_target), grpc::InsecureChannelCredentials()));
+    }
+    else if(posArgv.size()==2){
+        m_ip = posArgv[1];
+        std::string addr = std::string(m_ip, strlen(m_ip)) + ":50051";
+        stub_ = Register::NewStub(grpc::CreateChannel(addr, grpc::InsecureChannelCredentials()));
+    }
+    else if(posArgv.size()==3){
+        m_listen_ip = posArgv[2];
+        m_ip = posArgv[1];
+        std::string addr = std::string(m_ip, strlen(m_ip)) + ":50051";
+        stub_ = Register::NewStub(grpc::CreateChannel(addr, grpc::InsecureChannelCredentials()));
+    }
+
+    bool reply =SayRegist(node_name);
+    if(reply==true &&m_registSucess==false){
+        hDebug(Code::FG_RED) << "注册失败 已有相同名称的节点!\n";
+        exit(-1);
+    }
+    if(reply==true && m_registSucess==true){
+        hDebug(Code::FG_GREEN) << "注册成功!\n";
+    }
+
+    g_node=this;
+    signal(SIGINT, RegistOffline);
+}
+
 hansolo_node::hansolo_node(std::string node_name)
      :  m_node_name{node_name}
 {
-
     stub_ = Register::NewStub(grpc::CreateChannel(absl::GetFlag(FLAGS_target), grpc::InsecureChannelCredentials()));
 
     bool reply =SayRegist(node_name);
@@ -22,6 +54,8 @@ hansolo_node::hansolo_node(std::string node_name)
     g_node=this;
     signal(SIGINT, RegistOffline);
 }
+
+
 
 hansolo_node::~hansolo_node()
 {

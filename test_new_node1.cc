@@ -25,7 +25,7 @@ int main(int argc,char **argv)
 {
     // absl::ParseCommandLine(argc, argv);
 
-    hansolo_node client{"hansolo node1"};
+    hansolo_node client{"hansolo node1",argc,argv};
 
     auto sub = client.create_subscriber<hansolo_stdMsg>("/test_node", sub_callback);
     auto sub1 = client.create_subscriber<hansolo_stdMsg>("/test_node11", sub_callback1);
