@@ -33,7 +33,7 @@ int main(int argc,char **argv)
 {
   
 
-    hansolo_node client{"hansolo video1"};
+    hansolo_node client{"hansolo video1",argc,argv};
 
     auto sub = client.create_subscriber<hansolo_imageMsg>("/image_pub", sub_callback);
 

@@ -39,7 +39,7 @@ public:
       auto nowTime = msg.mutable_timestamp();
       nowTime->set_nanos(0);
       nowTime->set_seconds(time(NULL));
-
+      isEmpty = false;
       return msg;
     }
     void write_msg(){
@@ -49,6 +49,7 @@ public:
       height = msg.height();
       
       seconds = msg.timestamp().seconds();
+      isEmpty = false;
     }
     void printMessage() const
     {

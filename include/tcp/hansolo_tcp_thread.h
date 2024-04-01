@@ -9,6 +9,7 @@
 #include <vector>
 #include <chrono>
 #include <future>
+#include<queue>
 
 #include "colormod.h"
 #include "hansolo_msg_base.h"
@@ -43,6 +44,7 @@ private:
     std::function<void(google::protobuf::Any &)> func;
 
     M msg_data;
+    std::queue<M> data_queue{};
 
 public:
   
@@ -279,8 +281,8 @@ public:
         hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " subscriber启动";
      
         std::thread t(&hansolo_tcp_thread::update_callback, this, call_back);
-
         t.detach();
+
         while (1)
         {
             if (!m_stopE)
@@ -346,9 +348,10 @@ public:
             // data_msg.msg.ParseFromString(temp);
             // 从字节流中恢复数据结构 存入类中
             msg_data.write_msg();
-            hDebug(Color::FG_BLUE) << "写data "<<msg_data.getSecond();
+            data_queue.push(msg_data);
+            // hDebug(Color::FG_BLUE) << "写data "<<msg_data.getSecond();
             }
-            // call_back(data_msg);
+            // call_back(msg_data);
         }
         Close(my_tcp->serverfd);
     }
@@ -381,8 +384,16 @@ public:
                 {
                     std::lock_guard<std::mutex> data_lock(data_mu);
                     // data = msg_data;
-                    hDebug(Color::FG_BLUE) << "读data ";
-                    call_back(msg_data);
+                    // hDebug(Color::FG_BLUE) << "读data ";
+                    // if(!msg_data.isEmpty){
+                        if(!data_queue.empty()){
+                            // call_back(msg_data);
+                            call_back(data_queue.front());
+                            data_queue.pop();
+                        }
+
+                        // msg_data.isEmpty = true;
+                    // }
                 }
                 
             }

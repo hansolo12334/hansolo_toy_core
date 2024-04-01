@@ -8,16 +8,16 @@
 
 void sub_callback(const hansolo_stdMsg &msg)
 {
-    hDebug(Color::FG_DEFAULT) <<"time: "<<msg.getYear()<<" node1 recevie data "<< msg.data;
+    hDebug(Color::FG_DEFAULT)<<msg.getHour()<<'-'<<msg.getMinute()<<'-'<<msg.getSecond()<<" test_node recevie data "<< msg.data<<' ';
     // std::cout << "node1 recevie data " << msg.data << std::endl;
-    sleep(1);
+    // sleep(1);
 }
 
 void sub_callback1(const hansolo_stdMsg &msg)
 {
-    hDebug(Color::FG_DEFAULT) <<"time: "<<msg.seconds<<" node1 recevie data1 "<< msg.data;
+    hDebug(Color::FG_DEFAULT)<<msg.getHour()<<'-'<<msg.getMinute()<<'-'<<msg.getSecond()<<" test_node11 recevie data "<< msg.data<<' ';
     // std::cout << "node1 recevie data " << msg.data << std::endl;
-    sleep(2);
+    // sleep(2);
 }
 
 
@@ -28,7 +28,7 @@ int main(int argc,char **argv)
     hansolo_node client{"hansolo node1",argc,argv};
 
     auto sub = client.create_subscriber<hansolo_stdMsg>("/test_node", sub_callback);
-    auto sub1 = client.create_subscriber<hansolo_stdMsg>("/test_node11", sub_callback1);
+    // auto sub1 = client.create_subscriber<hansolo_stdMsg>("/test_node11", sub_callback1);
     // HansoloPublisher<hansolo_stdMsg> pub= client.create_publisher<hansolo_stdMsg>("/test_node1");
 
     while(1){

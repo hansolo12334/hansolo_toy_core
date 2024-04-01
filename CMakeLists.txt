@@ -18,7 +18,8 @@ add_library(hansolo_core
     )
 target_link_libraries(hansolo_core hw_grpc_proto ${OpenCV_LIBS})
 
-
+find_package(ZLIB REQUIRED)
+include_directories(${ZLIB_INCLUDE_DIRS})
 
 foreach(_target
   hansolocore
@@ -29,6 +30,7 @@ foreach(_target
   test_image
   test_image_receive
   test_image_receive2
+  test_compression
 )
   add_executable(${_target} "./${_target}.cc")
   target_link_libraries(${_target}
@@ -40,6 +42,7 @@ foreach(_target
     ${_GRPC_GRPCPP}
     ${_PROTOBUF_LIBPROTOBUF}
     pthread
+    ${ZLIB_LIBRARIES}
     )
 endforeach()
 
