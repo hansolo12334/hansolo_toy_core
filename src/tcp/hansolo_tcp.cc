@@ -132,6 +132,8 @@ bool hansolo_tcp::tcp_server_update_once_send_msg_big_data(std::string &message)
 {
 
     int i = 0;
+    bool re = true;
+
     rset = allset; /* structure assignment */
     nready = select(maxfd + 1, &rset, NULL, NULL, NULL);
     if (nready < 0)
@@ -190,6 +192,7 @@ bool hansolo_tcp::tcp_server_update_once_send_msg_big_data(std::string &message)
                 Close(sockfd);
                 FD_CLR(sockfd, &allset);
                 client[i] = -1;
+                re = false;
             }
             else
             {
@@ -208,6 +211,7 @@ bool hansolo_tcp::tcp_server_update_once_send_msg_big_data(std::string &message)
                     Close(sockfd);
                     FD_CLR(sockfd, &allset);
                     client[i] = -1;
+                    re = false;
                     continue;
                 }
                 //切割数据 分次发送
@@ -222,22 +226,24 @@ bool hansolo_tcp::tcp_server_update_once_send_msg_big_data(std::string &message)
                         Close(sockfd);
                         FD_CLR(sockfd, &allset);
                         client[i] = -1;
+                        re = false;
                         break;
                     }
                     msg_size -= n;
                     offset += n;
+                    re = true;
                     // std::cout << n << std::endl;
                 }
             }
 
             if (--nready == 0){
-                return 1; /* no more readable descriptors */
+                return re; /* no more readable descriptors */
             }
         }
 
     }
     message.clear();
-    return true;
+    return re;
 }
 
 

@@ -29,6 +29,8 @@ private:
     std::mutex mu;
     std::mutex data_mu;
 
+    
+
     bool m_stopE = false;
     bool m_pause = false;
     std::condition_variable m_cv;
@@ -46,11 +48,16 @@ private:
     M msg_data;
     std::queue<M> data_queue{};
 
+    
+
 public:
   
 
-    std::string sendData{};
-    bool already{false};
+    // std::string sendData{};
+    bool already{true};
+    std::mutex send_data_mu;
+    bool connectReady{true};
+    std::queue<std::string> send_data_queue{};
 
     hansolo_tcp_thread(int port, std::string node_name, std::string topic_name,const char *ip)
         : m_port{port}, m_node_name{node_name}, m_topic_name{topic_name}, 
@@ -98,7 +105,7 @@ public:
     {   
      
         my_tcp->init_server_tcp(port,ip);
-       
+
         hDebug(Color::FG_BLUE) << m_node_name << ' ' << m_topic_name << " publisher启动";
         while (1)
         {
@@ -113,14 +120,23 @@ public:
             {
                 break;
             }
-            // my_tcp->tcp_server_update_once();
-            if (sendData.length() > 0)
-            {
+     
+            // if (sendData.length() > 0)
+            // {
                 already = false;
-                my_tcp->tcp_server_update_once_send_msg_big_data(sendData);
-            }
-            sendData.clear();
-            already = true;
+                std::lock_guard<std::mutex> lock_data(send_data_mu);
+      
+                while(!send_data_queue.empty())
+                {
+                    connectReady=my_tcp->tcp_server_update_once_send_msg_big_data(send_data_queue.front());
+                  
+                    send_data_queue.pop();
+                    // hDebug() << "connectReady " << connectReady;
+                }
+                // sendData.clear();
+                already = true;
+            // }
+           
         }
     }
 
@@ -340,16 +356,16 @@ public:
             }
             std::string temp = std::string(buffer_msg, length);
             free(buffer_msg);
+
             {
-            std::lock_guard<std::mutex> data_lock(data_mu);
-            any.ParseFromString(temp);
-            any.UnpackTo(&msg_data.msg);
-            any.Clear();
-            // data_msg.msg.ParseFromString(temp);
-            // 从字节流中恢复数据结构 存入类中
-            msg_data.write_msg();
-            data_queue.push(msg_data);
-            // hDebug(Color::FG_BLUE) << "写data "<<msg_data.getSecond();
+                any.ParseFromString(temp);
+                any.UnpackTo(&msg_data.msg);
+                // 从字节流中恢复数据结构 存入类中
+                any.Clear();
+                msg_data.write_msg();
+                std::lock_guard<std::mutex> data_lock(data_mu);
+                data_queue.push(msg_data);
+                // hDebug(Color::FG_BLUE) << "写data "<<msg_data.getSecond();
             }
             // call_back(msg_data);
         }
@@ -382,12 +398,13 @@ public:
                 }
                 // M data;
                 {
-                    std::lock_guard<std::mutex> data_lock(data_mu);
+                    
                     // data = msg_data;
                     // hDebug(Color::FG_BLUE) << "读data ";
                     // if(!msg_data.isEmpty){
                         if(!data_queue.empty()){
                             // call_back(msg_data);
+                            std::lock_guard<std::mutex> data_lock(data_mu);
                             call_back(data_queue.front());
                             data_queue.pop();
                         }

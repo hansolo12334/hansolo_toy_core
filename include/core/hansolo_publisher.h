@@ -44,18 +44,26 @@ public:
 
     void publish(T &msg)
     {
-        if(!my_tcp->already){
-            return;
-        }
+        // hDebug() << msg.frameId << "-++++++--";
+        //如果 tcp没发送完数据 或者 没连接客户端 就返回
+        // 第一次发送时 already初始值是true 所以跳过
+        // if(!my_tcp->already ){
+        //     return;
+        // }
         std::string temp;
-        //测试 any
-        
-        any.PackFrom(msg.get_msg());
-        // msg.get_msg().SerializeToString(&temp);
-        // std::cout << msg << std::endl;
-        any.SerializeToString(&temp);
      
-        my_tcp->sendData = temp;
+        any.PackFrom(msg.get_msg());
+  
+        any.SerializeToString(&temp);
+
+        //如果还没发完 且 tcp以及连接了客户端 则先将数据填入队列
+        
+        // my_tcp->sendData = temp;
+        if(my_tcp->connectReady ) {
+            std::lock_guard<std::mutex> data_lock(my_tcp->send_data_mu);
+            my_tcp->send_data_queue.push(temp);
+        }
+        // 
         any.Clear();
     }
 };

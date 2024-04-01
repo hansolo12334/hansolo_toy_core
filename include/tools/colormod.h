@@ -40,6 +40,11 @@ public:
     {
     }
 
+    hDebug()
+        : m_md{Color::BG_DEFAULT}
+    {
+    }
+
     ~hDebug(){
         std::cout << '\n';
     }
